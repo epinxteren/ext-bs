@@ -1,0 +1,9 @@
+// based on vehicle.Vehicle
+Ext.define('app.proxy.Chinook', {
+    extend:'vehicle.Vehicle',
+    config:{
+        MPG:'0' },
+    constructor:function (config) {
+        this.initConfig(config);
+    }
+});
