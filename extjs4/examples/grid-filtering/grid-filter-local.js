@@ -107,6 +107,7 @@ Ext.onReady(function(){
         }]
     };
 
+
     // use a factory method to reduce code while demonstrating
     // that the GridFilter plugin may be configured with or without
     // the filter types (the filters may be specified on the column model

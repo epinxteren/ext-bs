@@ -12,22 +12,14 @@ Ext.define('App.view.albums.Index', {
         {
             store:'Albums',
             title:'Albums',                
-            xtype:'autoGrid',
-
-            listeners:{
-                selectionchange:function (model, records) {
-                    //debugger;
-                    var form = this.next("panel").down('form');
-                    if (records[0]) {
-                        form.setDisabled(false);
-                        form.loadRecord(records[0]);
-                    }
-                    //Filter songs
-
-                  // var Tracks = Ext.getStore();
-                    ///Tracks.filter([ {property: "email", value: /\.com$/}]);
+            xtype:'AutoGrid',
+            onSelectionChange:function (model, records) {
+                var form = this.next("panel").down('form');
+                if (records[0]) {
+                    form.setDisabled(false);
+                    form.loadRecord(records[0]);
                 }
-            }                
+            }
         },
         {
             flex:1,
@@ -43,11 +35,15 @@ Ext.define('App.view.albums.Index', {
                     remove:true,
                     disabled:true,
                     title:"Album",
-                    xtype:'autoForm',
+                    xtype:'AutoForm',
                     store:'Albums'
                 },
                 {
-                    xtype:'autoGrid',
+                    deleteItems:true,
+                    editItems:true,
+                    addItems:true,
+                    test:"TESTING",
+                    xtype:'AutoGrid',
                     store:'Tracks'
                 }
             ]

@@ -47,3 +47,12 @@
 .logout {
     background-image: url('../images/icons/small/logout.png') !important;
 }
+
+
+
+.add {
+    background-image:url(../images/add.png) !important;
+}
+.remove {
+    background-image:url(../images/delete.png) !important;
+}

@@ -6,7 +6,7 @@ Ext.define('App.view.tracks.Index', {
     items:[
             
     {
-        xtype:'autoGrid',
+        xtype:'AutoGrid',
         store:'Tracks'
     }
             

@@ -6,7 +6,11 @@ Ext.log = function () {
 }
 
 Ext.error = function () {
-    console.error.apply(console, arguments);
+
+    if(Ext.isDefined(console))
+    {
+        console.error.apply(console, arguments);
+    }
 }
 
 /**

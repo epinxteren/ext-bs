@@ -6,7 +6,7 @@ Ext.Loader.setConfig({
     paths:{
         'Ext.ux':'app/lib/ux',
         'Ext.ux.app':'app/lib/ux/app',
-        'Ext.ib':'app/lib/ib',
+        'Ext.ib':'app/lib/ib'
     }
 });
 

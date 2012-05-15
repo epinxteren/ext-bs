@@ -14,7 +14,7 @@ Ext.require(
         /* mixins */
         
         'Ext.ib.mixin.ModelIterator',
-        
+        'Ext.ib.mixin.FieldCreator',
         //'Ext.verz.data.Field',
         //'Ext.verz.window.FormWindow',
 
@@ -27,8 +27,7 @@ Ext.require(
         //'Ext.verz.notify.Send',
 
         /* components */
-        'Ext.ib.component.autoGrid',//'Ext.verz.Grid',
-        'Ext.ib.component.autoForm',//'Ext.verz.Grid',
+        'Ext.ib.component.AutoGrid',//'Ext.verz.Grid',
                        
         /* store */
         'Ext.ib.Store',
@@ -48,7 +47,7 @@ Ext.require(
         //'Ext.verz.button.Send',
 
         /* form fields */
-         'Ext.ib.component.autoForm',//'Ext.verz.Form',
+         'Ext.ib.component.AutoForm',//'Ext.verz.Form',
 
         //'Ext.verz.form.field.Date',
         //'Ext.verz.form.field.ObligatoryText',

@@ -7,6 +7,5 @@ Ext.namespace('Ib').config = {
 
     apiUrl : 'http://localhost/',
 
-    restUrl: '../../public/'
-
+    restUrl: 'http://localhost/zf-api-skel/public/'
 };
