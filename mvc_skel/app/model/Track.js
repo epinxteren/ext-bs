@@ -32,7 +32,15 @@ Ext.define('App.model.Track', {
     },
     {
         name:'bytes', 
-        type:'integer'
+        type:'integer',
+        ibOptions:{
+            grid:{
+                edit:true
+            },
+            form:{
+
+            }
+        }
     },
     {
         name:'unit_price', 
@@ -40,8 +48,11 @@ Ext.define('App.model.Track', {
         ibOptions:{
             grid:{
                 edit:true
-            }  
-        }         
+            },
+            form:{
+
+            }
+        }
     }
         /*,
         {

@@ -49,10 +49,29 @@
 }
 
 
-
 .add {
-    background-image:url(../images/add.png) !important;
+    background-image:url('../images/add.png') !important;
 }
 .remove {
-    background-image:url(../images/delete.png) !important;
+    background-image:url('../images/delete.png') !important;
+}
+
+.ib-actioncolumn {
+    height:16px;
+    width:16px;
+    cursor:pointer;
+    margin-left:3px;
+}
+
+
+.ib-actioncolumn-edit {
+    background-image: url('../images/icons/small/edit.png') !important;
+
+}
+.ib-actioncolumn-delete {
+    background-image: url('../images/icons/small/delete.png') !important;
+}
+
+.ib-actioncolumn-detail {
+    background-image: url('../images/icons/small/detail.png') !important;
 }

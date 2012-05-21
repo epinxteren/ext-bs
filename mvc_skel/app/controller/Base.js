@@ -9,9 +9,15 @@ Ext.define('App.controller.Base', {
             this.onLoaded();
         }
 	},
+
 	add: function(request) {
 		this.render("workspace", this["get" + this.id + "CreateView"]());
 	},
+
+    edit: function(request) {
+        this.render("workspace", this["get" + this.id + "EditView"](),{itemId:+request.id});
+    },
+
 	save: function(request) {
 		var sender = request.params.sender;
 		var values = sender.getForm().getValues();

@@ -12,6 +12,9 @@ Ext.require('Ext.ux.router.Router', function () {
     Ext.dispatch = Ext.Function.bind(Ext.Router.dispatch, Ext.Router);
     Ext.redirectTo = Ext.Function.bind(Ext.Router.redirectTo, Ext.Router);
 
+
+
+
     Ext.Router.draw(function (map) {
         map.connect(':controller');
         map.connect(':controller/:action');

@@ -1,5 +1,5 @@
 
-Ext.define('Ext.ib.IbReference', {});//Geen error door require
+Ext.define('Ext.ib.IbReference', {});//No error by require
 
 
 Ext.require(
@@ -19,13 +19,13 @@ Ext.require(
         //'Ext.verz.window.FormWindow',
 
         /* notifications */
-        //'Ext.verz.notify.Base',
-        //'Ext.verz.notify.Download',
-        //'Ext.verz.notify.Error',
-        //'Ext.verz.notify.Save',
-        //'Ext.verz.notify.Upload',
-        //'Ext.verz.notify.Send',
-
+        'Ext.ib.notify.Base',
+        'Ext.ib.notify.Download',
+        'Ext.ib.notify.Error',
+        'Ext.ib.notify.Save',
+        'Ext.ib.notify.Upload',
+        'Ext.ib.notify.Send',
+        'Ext.ib.notify.Delete',
         /* components */
         'Ext.ib.component.AutoGrid',//'Ext.verz.Grid',
                        
@@ -64,7 +64,7 @@ Ext.require(
         //'Ext.verz.form.field.CheckBox',
         //'Ext.verz.form.field.RadioText',
         //'Ext.verz.form.field.MultiFileUpload',
-        'Ext.ib.component.field.FieldText'
+        'Ext.ib.component.field.FieldText',
            
            
            
@@ -80,7 +80,7 @@ Ext.require(
         //'Ext.verz.panel.Search',
 
         /* Utils */
-        //'Ext.verz.Utils'
+        'Ext.ib.utils.Utils'
 ]);
 
 

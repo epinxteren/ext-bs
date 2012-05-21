@@ -2,6 +2,7 @@ Ext.define('App.model.Album', {
     extend:'Ext.ib.Model',
 
 
+
     idProperty:'id',
     fields:[
     //Verplichte velden:
@@ -9,7 +10,6 @@ Ext.define('App.model.Album', {
         name:'id', 
         type:'integer'
     },
-
     {
         name:'title', 
         type:'string',
@@ -17,54 +17,42 @@ Ext.define('App.model.Album', {
             grid:{    
                 show:true
             },
-            form:
-            {
-                
-            }
+            form:{}//Auto form
         }
     },
     {
         name:'ArtistId', 
         type:'integer', 
-        mapping:"artist.id"
+        mapping:"artist.id",
+
+        ibOptions:{
+            grid:{
+                show:true,
+                renderer: function(value, meta, record, rowIndex, colIndex, store, view) {
+                    return record.data.artist.name;
+                }
+            },
+            form:{
+                xtype:'FieldComboBox',
+
+                fieldLabel:'artist',
+                name:'ArtistId',
+
+                store:'Artists',
+                displayField:'name',
+                valueField:'id'
+            }
+        }
     },
     //Optionele velden:
     {
         name:'artist', 
         persist:false,
-        ibOptions:{
-            grid:{    
-                show:true,
-                renderer: function(value, meta, record, rowIndex, colIndex, store, view) {
-                    return value.name;
-                }
-            },
-            form:{
-                    xtype:'FieldComboBox',
-
-                    fieldLabel:'artist',
-                    name:'ArtistId',
-
-                    store:'Artists',
-                    displayField:'name',
-                    valueField:'id'
-
-
-                /*
-                    forceSelection:true,
-                    multiSelect:false,
-                    anchor:'100%',
-                    pageSize:10,
-                    allowBlank:true
-                */
-            }
-        },
         fields:[
         {
             name:'id', 
             type:'integer'
         },
-
         {            
             name:'name', 
             type:'string'
@@ -107,5 +95,5 @@ Ext.define('App.model.Album', {
      autoLoad:true
      }
      ]
-     */
+*/
 });

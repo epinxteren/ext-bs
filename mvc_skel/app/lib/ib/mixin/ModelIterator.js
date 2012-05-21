@@ -1,8 +1,3 @@
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 
 Ext.define('Ext.ib.mixin.ModelIterator', {
     
@@ -16,7 +11,7 @@ Ext.define('Ext.ib.mixin.ModelIterator', {
      *{
      *  name:undifined,//obj.name must excist, but can have any value
      *  values:{//values property must excist
-     *      show:true //obj.values.show must have property true
+     *      show:true //obj.values.show must have the same value, For this example: 'true'
      *  }
      *}
      *
