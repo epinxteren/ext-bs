@@ -1,7 +1,18 @@
-/**
- * Created with JetBrains PhpStorm.
- * User: epinxteren
- * Date: 21-5-12
- * Time: 10:55
- * To change this template use File | Settings | File Templates.
- */
+
+Ext.define('Ext.ib.utils.Utils', {});//No error by require
+
+Ext.ibDispatch  = function(url, parems){
+    if(Ext.isDefined(parems))
+    {
+        parems = Ext.JSON.encode(parems);
+        Ext.dispatch(url+"/"+parems);
+    }
+    else
+    {
+        Ext.dispatch(url);
+    }
+};
+
+
+
+

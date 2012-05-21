@@ -4,97 +4,96 @@
  */
 
 
-Ext.define('Ext.ib.component.autoForm', {
-    extend: 'Ext.form.Panel',
-    alias: 'widget.autoForm',
-    
-    mixins:{
-        ModelIterator:'Ext.ib.mixin.ModelIterator'  
-    },
-        
+Ext.define('Ext.ib.component.AutoForm', {
+    extend:'Ext.form.Panel',
+    alias:'widget.AutoForm',
 
+    mixins:{
+        ModelIterator:'Ext.ib.mixin.ModelIterator',
+        FieldCreator:'Ext.ib.mixin.FieldCreator'
+    },
 
     layout:'anchor',
-    
-    remove:false,    
-                
-    getDefualtXType:function(field){
-        
-        switch(field.type){
-            case 'integer':
-                return "FieldNumber";
-            case 'string':
-                return "FieldText";
-            default:
-                return "FieldText";
 
-        }      
-    }, 
-        
+
+
+    hasDeleteItem:false,
+
     initComponent:function () {
-        
+
         var me = this;
-        
+
         var fields = [];
-               
-        me.modelForEach(function(field,index){                        
-            var form =  field.ibOptions.form;    
 
-            if(!Ext.isDefined(form.xtype))
-                form.xtype = me.getDefualtXType(field);
+        me.modelForEach(function (field, index) {
+            var form = field.ibOptions.form;
 
-            if(me.layout === 'anchor')
-            {
-                if(!Ext.isDefined(form.anchor))
+            me.createField(field, form);
+
+            if (me.layout === 'anchor') {
+                if (!Ext.isDefined(form.anchor))
                     form.anchor = '100%';
             }
-            else if(!Ext.isDefined(form.flex))
+            else if (!Ext.isDefined(form.flex))
                 form.flex = 1;
 
-            if(!Ext.isDefined(form.fieldLabel))
+            if (!Ext.isDefined(form.fieldLabel))
                 form.fieldLabel = field.name;
 
-            if(!Ext.isDefined(form.name))
+            if (!Ext.isDefined(form.name))
                 form.name = field.name;
 
             fields.push(form);
 
-        },{//pass filter, only show colloms
+        }, {//pass filter, only show colloms
             ibOptions:{
                 form:{
+                }
             }
-            }
-        });               
+        });
 
         this.items = fields;
-        
-        ////////////////////////////////////////
-        //Buttons     
-        ////////////////////////////////////////            
-        if(!Ext.isDefined(  me.buttons))
-            me.buttons = [];             
-    
-        if(Ext.isDefined(me.remove)  && me.remove)
-        {
-            me.buttons.push({
-                text:'Delete',
-                handler:function () {
-                    var objForm = this.up('form').getForm();
-                    var record = objForm.getRecord();
-                    if (Ext.isDefined(record)) {
 
-                        objForm.reset();
-                        this.up('form').setDisabled(true);
+        me.initBarOptions();
 
-                        var store = Ext.getStore(me.store);
-                        store.remove(record);
-                        store.sync();
-                    }
+        me.callParent(arguments);
+    },
+
+
+    initBarOptions:function () {
+        var me = this;
+
+        var topBar = [];
+
+
+        var removeButton = {
+            text:'Delete',
+            handler:function () {
+                var objForm = this.up('form').getForm();
+                var record = objForm.getRecord();
+                if (Ext.isDefined(record)) {
+
+                    objForm.reset();
+                    this.up('form').setDisabled(true);
+
+                    var store = Ext.getStore(me.store);
+                    store.remove(record);
+                    store.sync();
                 }
-            });
-        }
+            }
+        };
 
-        me.buttons.push({
+        if (me.hasDeleteItem)
+            topBar = topBar.concat(topBar.length == 0 ? [removeButton] : ['-', removeButton]);
+
+        /* bottom bar */
+        ////////////////////////////////////////
+        //Buttons
+        ////////////////////////////////////////
+        var bottomBar = [];
+
+
+        var saveButton = {
             text:'Save',
             handler:function () {
                 var objForm = this.up('form').getForm();
@@ -104,10 +103,15 @@ Ext.define('Ext.ib.component.autoForm', {
                     record.save();
                 }
             }
-        });    
-        
-        me.callParent(arguments);                
+        };
+
+        bottomBar = bottomBar.concat(bottomBar.length == 0 ? [saveButton] : ['-', saveButton]);
+
+
+        if (topBar.length != 0)
+            me.tbar = topBar;
+
+        me.bbar = bottomBar;
     }
-    
-    
+
 });
