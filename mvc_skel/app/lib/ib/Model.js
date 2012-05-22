@@ -1,6 +1,6 @@
 
 
-Ext.define("Ext.ib.Model", {
+Ext.define("Ext.ib.model.Model", {
     /*
      * @cfg {Object} fields will hold the fields for this model
      */
