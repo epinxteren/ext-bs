@@ -9,12 +9,15 @@
 Ext.define('App.view.components.tracks.TrackPieChart', {
     extend:'Ext.chart.Chart',
     alias:'widget.components.TrackPieChart',
+    mixins:{
+        Filter:'Ext.ib.mixin.Filter'
+    },
 
     xtype: 'chart',
 
     animate: true,
 
-    store: 'Tracks',
+    itemId:undefined,
 
     shadow: true,
     legend: {
@@ -24,22 +27,8 @@ Ext.define('App.view.components.tracks.TrackPieChart', {
     theme: 'Base:gradients',
     series: [{
         type: 'pie',
-        field: 'data1',
+        field: 'milliseconds',
         showInLegend: true,
-        donut: donut,
-        tips: {
-            trackMouse: true,
-            width: 140,
-            height: 28,
-            renderer: function(storeItem, item) {
-                //calculate percentage.
-                var total = 0;
-                store1.each(function(rec) {
-                    total += rec.get('data1');
-                });
-                this.setTitle(storeItem.get('name') + ': ' + Math.round(storeItem.get('data1') / total * 100) + '%');
-            }
-        },
         highlight: {
             segment: {
                 margin: 20
@@ -51,9 +40,39 @@ Ext.define('App.view.components.tracks.TrackPieChart', {
             contrast: true,
             font: '18px Arial'
         }
-    }]
+    }],
 
+    setAlbumId:function(id)
+    {
+        this.itemId = id;
+        this.createFilter();
+    },
 
+    createFilter:function()
+    {
+        var me = this;
+        if(Ext.isDefined(me.itemId))
+        {
+            me.filters =[{
+                property:"album",
+                value:me.itemId
+            }];
+            me.enableFilter();
+        }else
+        {
+            me.filters = [];
+        }
 
+    },
+
+    initComponent:function () {
+        var me = this;
+
+        me.store = Ext.create('App.store.Tracks',{storeId:undefined,buffered:false});
+        me.store.disablePagin();
+
+        this.createFilter();
+        this.callParent(arguments);
+    }
 
 });

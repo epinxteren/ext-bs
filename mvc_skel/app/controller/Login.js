@@ -2,7 +2,7 @@
 
 
 Ext.define('App.controller.Login', {
-    extend:'App.controller.Base',
+    extend: 'Ext.ib.controller.Base',
     init:function () {
         this.control({
             'viewport':{

@@ -1,21 +1,31 @@
 Ext.define('App.view.artists.Index', {
-	extend: 'Ext.panel.Panel',
-	alias: 'widget.artists.Index',
-	title: 'Artists Grid',
-	html: 'Artists rows here',
+    extend:'Ext.ib.component.AutoGrid',
+    alias:'widget.artists.Index',
+    title:'Artists Grid',
 
-	dockedItems: [
+    hasDeleteItems:true,
+    hasEditItems:true,
+    dispatch:"artists/",
+    store:'Artists',
 
-        /*{
+    closable:true,
 
-
-		xtype: 'toolbar',
-		dock: 'top',
-		items: [{
-			text: 'Add',
-			handler: function() {
-                Ext.History.add('artists/add', true);
-			}
-		}]
-	}*/]
+    dockedItems:[
+        {
+            xtype:'AutoSearch',
+            store:'Artists'
+        },
+        {
+            xtype:'toolbar',
+            dock:'top',
+            items:[
+                {
+                    xtype:'addbutton',
+                    handler:function () {
+                        Ext.History.add('artists/add', true);
+                    }
+                }
+            ]
+        }
+    ]
 });

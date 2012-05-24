@@ -1,5 +1,5 @@
 Ext.define('App.controller.Artists', {
-	extend: 'App.controller.Base',
+    extend: 'Ext.ib.controller.Base',
 	views: [
 		'artists.Index',
 		'artists.Create',

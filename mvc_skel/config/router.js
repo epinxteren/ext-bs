@@ -19,5 +19,7 @@ Ext.require('Ext.ux.router.Router', function () {
         map.connect(':controller');
         map.connect(':controller/:action');
         map.connect(':controller/:action/:id');
+
+
     });
 });

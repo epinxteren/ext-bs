@@ -2,8 +2,8 @@
  * search button
  *
  */
-Ext.define('Ext.verz.button.Search', {
-    extend:'Ext.verz.button.Base',
+Ext.define('Ext.ib.button.Search', {
+    extend:'Ext.ib.button.Base',
     alias:'widget.searchbutton',
     text:'search',
     action:'search',

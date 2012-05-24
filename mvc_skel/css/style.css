@@ -64,6 +64,55 @@
 }
 
 
+
+.ib-button-icon-generate_password {
+    background-image: url('../images/icons/small/key_add.png') !important;
+}
+
+.ib-button-icon-save {
+    background-image: url('../images/icons/small/disk.png') !important;
+}
+
+.ib-button-icon-cancel {
+    background-image: url('../images/icons/small/cross.png') !important;
+}
+
+.ib-button-icon-next {
+    background-image: url('../images/icons/small/next.png') !important;
+}
+.ib-button-icon-previous {
+    background-image: url('../images/icons/small/back.png') !important;
+}
+.ib-button-icon-send {
+    background-image: url('../images/icons/small/email.png') !important;
+}
+
+.ib-button-icon-delete {
+    background-image: url('../images/icons/small/delete.png') !important;
+}
+
+.ib-button-icon-add {
+    background-image: url('../images/icons/small/add.png') !important;
+}
+
+.ib-button-icon-useradd {
+    background-image: url('../images/icons/small/user_add.png') !important;
+}
+
+
+.ib-button-icon-search {
+    background-image: url('../images/icons/small/search.png') !important;
+}
+
+.ib-button-icon-reset {
+    background-image: url('../images/icons/small/reset.png') !important;
+}
+
+.ib-button-icon-export {
+    background-image: url('../images/icons/small/export.png') !important;
+}
+
+
 .ib-actioncolumn-edit {
     background-image: url('../images/icons/small/edit.png') !important;
 

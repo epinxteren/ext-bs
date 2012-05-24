@@ -16,7 +16,7 @@ Ext.define('Ext.ib.component.field.FieldComboBox', {
     pageSize:25,
     queryMode:'remote',
     minChars:2,
-    valueNotFoundText:"not_found",//translate("not_found"),
+    valueNotFoundText:translate("not_found"),
 
     /**
      * Will create the search query for this combobox.

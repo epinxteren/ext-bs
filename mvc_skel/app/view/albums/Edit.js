@@ -1,50 +1,42 @@
 Ext.define('App.view.albums.Edit', {
-	extend: 'App.view.albums.Create',
-	alias: 'widget.albums.Edit',
-	title: 'Edit Album',
-
+    alias:'widget.albums.Edit',
+    extend:'Ext.panel.Panel',
+    flex:1,
+    layout:{
+        type:'hbox',
+        align:'stretch'
+    },
     initComponent:function () {
         var me = this;
-        me.callParent(arguments);
-    },
-    listeners:{
-        afterrender:{
-            fn:function()
+        me.items = [
             {
-                var me = this;
-                var form =  me.down("form").getForm();
-                var store = Ext.getStore(form.store);
-                var item = store.getById(me.itemId);
-                if(Ext.isDefined(item) && item != null)
-                {
-                   form.loadRecord(item);
-                }
+                loadItemId:me.itemId,
+                flex:1,
+                editForm:true,
+                title:"Album",
+                xtype:'AutoForm',
+                store:'Albums'
+            },
+            {
+                flex:1,
+                xtype:'panel',
+                layout:{
+                    type:'vbox',
+                    align:'stretch'
+                },
+                items:[
+                    {
+                        filters:[{
+                            property:"album",
+                            value:me.itemId
+                        }],
+                        title:'Albums tracks',
+                        xtype:'tracks.Index',
+                        flex:1
+                    }
+                ]
             }
-        }
-    },
-    buttons:[
-        {
-            text:'Save',
-            handler:function () {
-                debugger;
-                var panel =  this.up('panel');
-                var form = panel.down('form').getForm();
-                //var form = this.up('form').getForm();
-                var store = Ext.getStore(form.store);
-                var record = store.getById(panel.itemId);
-                form.updateRecord(record);
-                if (record.isValid())
-                {
-                    record.save({
-                        success:function (rec, op) {
-                            Ext.create('widget.savenotify', {response:op, titleField:panel.titleField, idField:panel.idField }).show();
-                        },
-                        failure:function (rec, op) {
-                            Ext.create('widget.errornotify', {response:op}).show();
-                        }
-                    });
-                }
-            }
-        }
-    ]
+        ];
+        me.callParent(arguments);
+    }
 });

@@ -2,8 +2,8 @@
  * Idbutton allows for the adding of ids to the text and link at a later moment
  *
  */
-Ext.define('Ext.verz.button.IdButton', {
-    extend:'Ext.verz.button.Base',
+Ext.define('Ext.ib.button.IdButton', {
+    extend:'Ext.ib.button.Base',
     alias:'widget.idbutton',
     text:'Default text',
     defaultText:'Default text %s',

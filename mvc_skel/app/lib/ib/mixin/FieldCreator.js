@@ -18,12 +18,32 @@ Ext.define('Ext.ib.mixin.FieldCreator', {
                 return "FieldNumber";
             case 'string':
                 return "FieldText";
+            case 'boolean':
+                return "CheckBox";
+            case 'bool':
+                return "CheckBox";
+            case 'date':
+                return 'datefield';
             default:
                 return "FieldText";
         }
     },
 
-
+    getLabelName:function(field,dest)
+    {
+        var ibOptions = field.ibOptions;
+        if(Ext.isDefined(dest.label))
+        {
+            return translate(dest.label);
+        }
+        else if(Ext.isDefined(ibOptions.label))
+        {
+            return translate(ibOptions.label);
+        }else
+        {
+            return field.name;
+        }
+    },
 
     /**
      * Will create a form field from a model field

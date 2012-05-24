@@ -2,8 +2,8 @@
  * reset button
  *
  */
-Ext.define('Ext.verz.button.Reset', {
-    extend:'Ext.verz.button.Base',
+Ext.define('Ext.ib.button.Reset', {
+    extend:'Ext.ib.button.Base',
     alias:'widget.resetbutton',
     text:'reset',
     action:'reset'

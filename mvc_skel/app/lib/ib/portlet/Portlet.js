@@ -1,5 +1,5 @@
 
-Ext.define('Ext.ib.Portlet', {
+Ext.define('Ext.ib.portlet.Portlet', {
     extend : 'Ext.window.Window',
     alias : 'widget.Portlet',
 
@@ -13,8 +13,6 @@ Ext.define('Ext.ib.Portlet', {
     constrain : true,
     maximizable : true,
     headerPosition : 'top'
-
-
 
 
 

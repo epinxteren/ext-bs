@@ -2,6 +2,9 @@
 
 
 
+
+
+
 Ext.require('Ext.ib.IbReference',function(){
 
     Ext.require('Ext.ux.app.RoutedApplication', function () {
@@ -9,10 +12,8 @@ Ext.require('Ext.ib.IbReference',function(){
             appFolder:'app',
             name:'App',
             controllers:[
-                'Base',
                 'Login',
                 'Dashboard',
-                'Base',
                 'Albums',
                 'Artists',
                 'Tracks'

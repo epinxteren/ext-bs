@@ -2,8 +2,8 @@
  * Cancel button
  *
  */
-Ext.define('Ext.verz.button.Cancel', {
-    extend:'Ext.verz.button.Base',
+Ext.define('Ext.ib.button.Cancel', {
+    extend:'Ext.ib.button.Base',
     alias:'widget.cancelbutton',
     text:'cancel',
     addDefaultHandler:true,

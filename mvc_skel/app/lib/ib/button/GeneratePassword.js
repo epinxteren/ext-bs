@@ -2,8 +2,8 @@
  * Generate password button
  *
  */
-Ext.define('Ext.verz.button.GeneratePassword', {
-    extend:'Ext.verz.button.Base',
+Ext.define('Ext.ib.button.GeneratePassword', {
+    extend:'Ext.ib.button.Base',
     alias:'widget.generatepasswordbutton',
     text:'generate_password',
     action:'generatepasswords',

@@ -1,7 +1,9 @@
+
 /**
- * Created with JetBrains PhpStorm.
- * User: epinxteren
- * Date: 22-5-12
- * Time: 9:33
- * To change this template use File | Settings | File Templates.
+ * Field for the inner edit of {Ext.ib.component.AutoGrid} or field for the {Ext.ib.component.AutoForm}
  */
+Ext.define('Ext.ib.component.ibOptions.Form', {
+
+
+
+});

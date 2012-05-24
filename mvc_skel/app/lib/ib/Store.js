@@ -16,7 +16,11 @@ Ext.define("Ext.ib.Store", {
     /**
      * @cfg {Boolean} [remoteSort=true] when sorting do this on the server
      */
-    remoteSort:false
+    remoteSort:false,
+
+    disablePagin:function(){
+        this.pageSize= 99999999;
+    }
 });
 
 

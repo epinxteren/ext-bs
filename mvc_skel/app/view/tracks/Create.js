@@ -1,11 +1,18 @@
 Ext.define('App.view.tracks.Create', {
-	extend: 'Ext.form.Panel',
-	alias: 'widget.tracks.Create',
-	title: 'Create Song',
-	bodyStyle: 'padding: 10px',
-	items: [{
-		xtype: 'textfield',
-		name: 'name',
-		fieldLabel: 'Name'
-	}]
+    extend:'Ext.panel.Panel',
+    alias:'widget.tracks.Create',
+    flex:1,
+    layout:{
+        type:'hbox',
+        align:'stretch'
+    },
+    items:[
+        {
+            titleField:'name',
+            flex:1,
+            addForm:true,
+            xtype:'AutoForm',
+            store:'Tracks'
+        }
+    ]
 });

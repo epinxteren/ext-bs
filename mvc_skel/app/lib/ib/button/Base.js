@@ -6,7 +6,7 @@
  *
  * Will also add vzs-button-icon- + text to the icon class unless setIconClass is set to false
  */
-Ext.define('Ext.verz.button.Base', {
+Ext.define('Ext.ib.button.Base', {
     extend:'Ext.button.Button',
     /**
      * @cfg {String} [text=button]
@@ -24,7 +24,7 @@ Ext.define('Ext.verz.button.Base', {
         var me = this;
 
         if (me.setIconClass) {
-            me.iconCls = me.iconCls + ' vzs-button-icon-' + me.text;
+            me.iconCls = me.iconCls + ' ib-button-icon-' + me.text;
         }
 
         if (typeof(translate) == 'function') {

@@ -1,13 +1,18 @@
 Ext.define('App.view.artists.Create', {
-	extend: 'Ext.form.Panel',
-	alias: 'widget.artists.Create',
-	title: 'Create artist',
-	bodyStyle: 'padding: 10px',
-	height: 200,
-	width: 300,
-	items: [{
-		xtype: 'textfield',
-		name: 'name',
-		fieldLabel: 'Name'
-	}]
+    extend:'Ext.panel.Panel',
+    alias:'widget.artists.Create',
+    flex:1,
+    layout:{
+        type:'hbox',
+        align:'stretch'
+    },
+    items:[
+        {
+            flex:1,
+            addForm:true,
+            xtype:'AutoForm',
+            store:'Artists',
+            titleField:'name'
+        }
+    ]
 });

@@ -1,71 +1,95 @@
 Ext.define('App.model.Album', {
     extend:'Ext.ib.Model',
-
-
-
     idProperty:'id',
     fields:[
-    //Verplichte velden:
-    {
-        name:'id', 
-        type:'integer'
-    },
-    {
-        name:'title', 
-        type:'string',
-        ibOptions:{
-            grid:{    
-                show:true
-            },
-            form:{}//Auto form
-        }
-    },
-    {
-        name:'ArtistId', 
-        type:'integer', 
-        mapping:"artist.id",
 
-        ibOptions:{
-            grid:{
-                show:true,
-                renderer: function(value, meta, record, rowIndex, colIndex, store, view) {
-                    return record.data.artist.name;
-                }
-            },
-            form:{
-                xtype:'FieldComboBox',
-
-                fieldLabel:'artist',
-                name:'ArtistId',
-
-                store:'Artists',
-                displayField:'name',
-                valueField:'id'
-            }
-        }
-    },
-    //Optionele velden:
-    {
-        name:'artist', 
-        persist:false,
-        fields:[
         {
-            name:'id', 
+            name:'id',
             type:'integer'
         },
-        {            
-            name:'name', 
-            type:'string'
+        {
+            name:'title',
+            type:'string',
+            ibOptions:{
+                grid:{
+                    inGridEditing:true
+                },
+                form:{},//Auto form,
+                filter:{}
+            }
+        },
+        {
+            name:'ArtistId',
+            type:'integer',
+            mapping:"artist.id",
+
+            ibOptions:{
+                label:'Artist',
+                grid:{
+                    inGridEditing:true,
+                    headerName:'Artist',
+                    renderer:function (value, meta, record, rowIndex, colIndex, store, view) {
+                        return record.data.artist.name;
+                    }
+                },
+                form:{
+                    xtype:'FieldComboBox',
+
+                    fieldLabel:'artist',
+                    name:'ArtistId',
+
+                    store:'Artists',
+                    displayField:'name',
+                    valueField:'id'
+                },
+                filter:{
+                    onFilter:function(field,value,filter)
+                    {
+
+                        debugger;
+                    }
+                }
+            }
+        },
+        //Optional values:
+        {
+            name:'artist',
+            persist:false,
+            fields:[
+                {
+                    name:'id',
+                    type:'integer'
+                },
+                {
+                    name:'name',
+                    type:'string'
+                }
+            ]
+        },
+        {
+            name:'Other albums',
+            persist:false,
+            type:'integer',
+            ibOptions:{
+                grid:{
+                    renderer:function (value, meta, record, rowIndex, colIndex, store, view) {
+                        var str = record.data.artist.albums.length;
+                        if(!Ext.isDefined(str) ||  str === "")
+                        return "0";
+                        else
+                        return str;
+                    }
+                }
+            }
         }
-        ]
-    }
+
     ],
 
     proxy:{
         type:'IbRest',
         url:Ib.config.restUrl + 'Album/'
     }
-/*
+    /*
      hasMany:{
      model:'App.model.Track',
      name:'Tracks',
@@ -95,5 +119,5 @@ Ext.define('App.model.Album', {
      autoLoad:true
      }
      ]
-*/
+     */
 });

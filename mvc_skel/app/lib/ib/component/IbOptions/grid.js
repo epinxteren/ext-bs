@@ -1,7 +1,22 @@
+
 /**
- * Created with JetBrains PhpStorm.
- * User: epinxteren
- * Date: 22-5-12
- * Time: 9:31
- * To change this template use File | Settings | File Templates.
+ * Colloms for the {Ext.ib.component.AutoGrid}
  */
+Ext.define('Ext.ib.component.ibOptions.Grid', {
+
+    extend:'Ext.grid.column.Column',
+
+    /**
+     * @cfg {String:name} headerName is the name of the header column
+     */
+    headerName:'',
+
+    /**
+     * @cfg {Boolean} inGridEditing can be edited inside the grid
+     */
+    inGridEditing:false
+
+
+
+
+});

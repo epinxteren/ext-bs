@@ -15,6 +15,7 @@ Ext.require(
         
         'Ext.ib.mixin.ModelIterator',
         'Ext.ib.mixin.FieldCreator',
+        'Ext.ib.mixin.Filter',
         //'Ext.verz.data.Field',
         //'Ext.verz.window.FormWindow',
 
@@ -26,25 +27,32 @@ Ext.require(
         'Ext.ib.notify.Upload',
         'Ext.ib.notify.Send',
         'Ext.ib.notify.Delete',
+
+
         /* components */
         'Ext.ib.component.AutoGrid',//'Ext.verz.Grid',
-                       
+
+        'Ext.ib.component.ibOptions.Grid',
+
+        'Ext.ib.component.AutoSearch',
+
+
         /* store */
         'Ext.ib.Store',
         /* buttons */
-        //'Ext.verz.button.Base',
-        //'Ext.verz.button.Save',
-        //'Ext.verz.button.Next',
-        //'Ext.verz.button.Previous',
-        //'Ext.verz.button.Cancel',
-        //'Ext.verz.button.Add',
-        //'Ext.verz.button.Delete',
-        //'Ext.verz.button.Search',
-        //'Ext.verz.button.Reset',
-        //'Ext.verz.button.IdButton',
-        //'Ext.verz.button.GeneratePassword',
-        //'Ext.verz.button.Export',
-        //'Ext.verz.button.Send',
+        'Ext.ib.button.Base',
+        'Ext.ib.button.Save',
+        'Ext.ib.button.Next',
+        'Ext.ib.button.Previous',
+        'Ext.ib.button.Cancel',
+        'Ext.ib.button.Add',
+        'Ext.ib.button.Delete',
+        'Ext.ib.button.Search',
+        'Ext.ib.button.Reset',
+        'Ext.ib.button.IdButton',
+        'Ext.ib.button.GeneratePassword',
+        'Ext.ib.button.Export',
+        'Ext.ib.button.Send',
 
         /* form fields */
          'Ext.ib.component.AutoForm',//'Ext.verz.Form',
@@ -65,9 +73,11 @@ Ext.require(
         //'Ext.verz.form.field.RadioText',
         //'Ext.verz.form.field.MultiFileUpload',
         'Ext.ib.component.field.FieldText',
-           
-           
-           
+
+
+
+        'Ext.ib.portlet.Portlet',
+        'Ext.ib.portlet.PortletControl',
         /* relations */
         //'Ext.verz.form.relations.ManyToOne',
 
@@ -76,7 +86,7 @@ Ext.require(
 
         /* error handler */
         //'Ext.verz.util.ErrorHandler',
-        //'Ext.verz.panel.Base',
+        'Ext.ib.controller.Base',
         //'Ext.verz.panel.Search',
 
         /* Utils */

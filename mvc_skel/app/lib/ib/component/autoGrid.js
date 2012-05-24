@@ -1,3 +1,8 @@
+
+
+/*
+ * Is a {Ext.grid.Panel} that can create a grid from a store model fields
+ */
 Ext.define('Ext.ib.component.AutoGrid', {
     extend:'Ext.grid.Panel',
     alias:'widget.AutoGrid',
@@ -6,7 +11,8 @@ Ext.define('Ext.ib.component.AutoGrid', {
 
     mixins:{
         ModelIterator:'Ext.ib.mixin.ModelIterator',
-        FieldCreator:'Ext.ib.mixin.FieldCreator'
+        FieldCreator:'Ext.ib.mixin.FieldCreator',
+        Filter:'Ext.ib.mixin.Filter'
     },
 
 
@@ -21,7 +27,7 @@ Ext.define('Ext.ib.component.AutoGrid', {
     /**
      * @cfg {String} Name of grid
      */
-    title:'',
+    title:undefined,
 
     /**
      * @cfg {Boolean} paging enabled
@@ -54,14 +60,15 @@ Ext.define('Ext.ib.component.AutoGrid', {
      */
     hasAddItems:false,
 
-
+    /**
+     * @cfg {Boolean:true} if a item is changed inside the grid the value wil be saved with the store
+     */
     hasAutoSyncItems:true,
 
     /**
      * @cfg {Boolean} editing colloms inside the grid
      */
     hasEditItems:false,
-
 
     /**
      * @cfg {String} the dispatch name for editing  dispatch + editDispatch
@@ -79,17 +86,24 @@ Ext.define('Ext.ib.component.AutoGrid', {
     hasDetailItems:false,
 
     /**
-     * @cfg {String} the dispatch name for detail  dispatch + detailDispatch
+     * @cfg {String} The dispatch name for detail  dispatch + detailDispatch
      */
     detailDispatch:'detail/',
 
 
-    hasEditPopupForm:false,//TODO, edit popup maken
+    hasEditPopupForm:false,//TODO:Create edit popup
 
     flex:1,
 
-    sortable:true,
+    /**
+     * @cfg {Boolean}  Enable collom sortable for all fields
+     */
+    sortable:false,
 
+    /**
+     * @event
+     * Enable collom sortable for all fields
+     */
     onSelectionChange:undefined,
 
 
@@ -112,6 +126,8 @@ Ext.define('Ext.ib.component.AutoGrid', {
         me.addActionColumn();
 
         me.initBarOptions();
+
+        me.enableFilter();
 
         /* Lisseners */
         me.listeners = {
@@ -169,7 +185,9 @@ Ext.define('Ext.ib.component.AutoGrid', {
         }
     },
 
-
+    /**
+     * Add basic grid colloms from {Ext.ib.component.IbOptions}
+     */
     addBasicCollomns:function () {
 
         var me = this;
@@ -179,29 +197,33 @@ Ext.define('Ext.ib.component.AutoGrid', {
 
             var grid = field.ibOptions.grid;
             var editable = Ext.isDefined(field.ibOptions.form);
+            var ibOptions = field.ibOptions;
 
-            var collom = {
-                flex:Ext.isDefined(grid.flex) ? grid.flex : 1,
-                text:Ext.isDefined(grid.text) ? grid.text : field.name,
-                dataIndex:field.name,
-                sortable:Ext.isDefined(grid.sortable) ? grid.sortable : false
-            };
+            var column = Ext.create('Ext.ib.component.ibOptions.Grid',grid);
+
+
+            column.flex = Ext.isDefined(grid.flex) ? grid.flex : 1;
+
+            column.text =  me.getLabelName(field,grid);
+
+            column.dataIndex = field.name;
+            column.sortable  = Ext.isDefined(grid.sortable) ? grid.sortable : false;
 
             if (Ext.isDefined(grid.renderer))
-                collom.renderer = grid.renderer;
+                column.renderer = grid.renderer;
 
             if (me.hasStdFilter || Ext.isDefined(grid.filter)) {
                 if (Ext.isDefined(grid.filter))
-                    collom.filter = grid.filter;
+                    column.filter = grid.filter;
                 else
-                    collom.filterable = true;
+                    column.filterable = true;
             }
 
             if (me.hasEditItems && editable && (Ext.isDefined(grid.inGridEditing) && grid.inGridEditing)) {
                 var form = field.ibOptions.form;
-                collom.field = me.createField(field, form);
+                column.field = me.createField(field, form);
             }
-            columns.push(collom);
+            columns.push(column);
 
         }, {//pass filter, only show colloms
             ibOptions:{
@@ -239,6 +261,7 @@ Ext.define('Ext.ib.component.AutoGrid', {
             local:true,
             filters:[]
         };
+
         me.features.push(filters);
 
         me.columns = columns;

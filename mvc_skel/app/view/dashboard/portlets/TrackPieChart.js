@@ -1,7 +1,40 @@
-/**
- * Created with JetBrains PhpStorm.
- * User: epinxteren
- * Date: 23-5-12
- * Time: 8:45
- * To change this template use File | Settings | File Templates.
- */
+
+Ext.define('App.view.dashboard.portlets.TrackPieChart', {
+
+    requires:['App.view.components.tracks.TrackPieChart'],
+
+    extend:'Ext.ib.portlet.PortletControl',
+
+    alias:'widget.portlet.TrackPieChart',
+
+    text:translate('TrackPieChart'),
+
+    popupItems:[{
+        width:500,
+        xtype:'FieldComboBox',
+        flex:1,
+        store:'Albums',
+        displayField:'title',
+        valueField:'id'
+    }],
+
+    portletItems:[{
+        flex:1,
+        xtype:'components.TrackPieChart'
+    }],
+
+    onAttachPortlet:function(pupup, portlet,items){
+        var box = pupup.down('FieldComboBox');
+        var valueId = box.getValue();
+        if(!isNaN(valueId))
+        {
+            var pie = items[0];
+            pie.setAlbumId(valueId);
+        }else
+        {
+            return false;
+        }
+    }
+
+});
+

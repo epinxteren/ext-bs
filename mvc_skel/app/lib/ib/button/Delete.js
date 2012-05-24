@@ -2,8 +2,8 @@
  * Delete button
  *
  */
-Ext.define('Ext.verz.button.Delete', {
-    extend:'Ext.verz.button.Base',
+Ext.define('Ext.ib.button.Delete', {
+    extend:'Ext.ib.button.Base',
     alias:'widget.deletebutton',
     text:'delete',
     action:'delete'

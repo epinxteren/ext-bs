@@ -2,18 +2,20 @@ Ext.define('App.view.dashboard.Index', {
     extend:'Ext.panel.Panel',
     alias:'widget.dashboard.Index',
     title:'Dashboard',
-    html:'Dashboard items',
-
+    requires:['App.view.dashboard.portlets.Browser',
+              'App.view.dashboard.portlets.TrackPieChart'],
     dockedItems:[
         {
             xtype:'toolbar',
             dock:'top',
             items:[
                 {
-                    text:'Add',
-                    handler:function () {
-                        //Ext.dispatch('artists/add');
-                    }
+                    xtype:'portlet.Browser',
+                    attachTo:'panel'
+                },
+                {
+                    xtype:'portlet.TrackPieChart',
+                    attachTo:'panel'
                 }
             ]
         }
