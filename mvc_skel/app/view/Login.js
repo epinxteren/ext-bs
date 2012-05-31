@@ -18,7 +18,139 @@ Ext.define('App.view.Login', {
     layout:'border',
     title:'Login',
 
+    locales:{
+        title:'login.Login'
+    },
+
     initComponent:function () {
+
+
+
+        var items = [
+            {
+                itemId:'userName',
+                xtype:'textfield',
+                fieldLabel:'Username',
+                name:'userName',
+                allowBlank:false,
+                anchor:'100%',
+                validateOnBlur:false,
+                locales:{
+                    fieldLabel:'login.username'
+                }
+            },
+            {
+                xtype:'textfield',
+                fieldLabel:'Password',
+                name:'password',
+                allowBlank:false,
+                inputType:'password',
+                anchor:'100%',
+                validateOnBlur:false,
+                enableKeyEvents:true,
+                locales:{
+                    fieldLabel:'login.Password'
+                },
+                listeners:{
+                    render:{
+                        fn:function (field, eOpts) {
+                            field.capsWarningTooltip = Ext.create('Ext.tip.ToolTip', {
+                                target:field.bodyEl,
+                                anchor:'top',
+                                width:305,
+                                html:'Caps lock warning'
+                            });
+
+                            // disable to tooltip from showing on mouseover
+                            field.capsWarningTooltip.disable();
+                        },
+                        scope:this
+                    },
+
+                    keypress:{
+                        fn:function (field, e, eOpts) {
+                            var charCode = e.getCharCode();
+                            if ((e.shiftKey && charCode >= 97 && charCode <= 122) ||
+                                (!e.shiftKey && charCode >= 65 && charCode <= 90)) {
+
+                                field.capsWarningTooltip.enable();
+                                field.capsWarningTooltip.show();
+                            }
+                            else {
+                                if (field.capsWarningTooltip.hidden === false) {
+                                    field.capsWarningTooltip.disable();
+                                    field.capsWarningTooltip.hide();
+                                }
+                            }
+                        },
+                        scope:this
+                    },
+
+                    blur:function (field) {
+                        if (field.capsWarningTooltip.hidden === false) {
+                            field.capsWarningTooltip.hide();
+                        }
+                    }
+                }
+            }
+        ];
+
+        if (Ib.config.locales.length > 1) {
+
+            items.push({
+                    xtype:'form',
+
+                    layout:{
+                        type:'hbox',
+                        align:'middle'
+
+                    },
+                    border:0,
+                    anchor:'100%',
+
+                    defaults:{
+                        labelWidth:85
+                    },
+                    items:[
+                        {
+                            xtype:'combobox',
+                            fieldLabel:'&nbsp;',
+                            queryMode:'local',
+                            displayField:'text',
+                            valueField:'abbr',
+                            value:Ux.locale.Manager.getLanguage(),
+                            flex:1,
+                            store:Ux.locale.Manager.getAvailable(false),
+                            locales:{
+                                fieldLabel:'login.chooselanguage'
+                            },
+                            listConfig:{
+                                getInnerTpl:function () {
+                                    // here you place the images in your combo
+                                    var tpl = '<div>' +
+                                        '<img src="images/flags/png/{abbr}.png" align="left">&nbsp;&nbsp;' +
+                                        '{text}</div>';
+                                    return tpl;
+                                }
+                            },
+                            listeners:{
+                                change:function (cb, value) {
+                                    Ux.locale.Manager.updateLocale(value);
+                                    this.next('image').setSrc("images/flags/png/"+value+".png");
+                                }
+                            }
+                        },
+                        {
+                            padding:"0 0 0 5",
+                            xtype:'image',
+                            src:"images/flags/png/"+Ux.locale.Manager.getLanguage()+".png",
+                            height:15
+                        }
+                    ]
+                }
+            );
+            this.height += 30;
+        }
 
         Ext.apply(this, {
             items:[
@@ -27,9 +159,17 @@ Ext.define('App.view.Login', {
                     xtype:'panel',
                     cls:'form-login-header',
                     baseCls:'x-plain',
-                    html:'intro',
+                    //html:'intro',
                     region:'north',
-                    height:60
+                    height:60,
+                    items:[
+                        {
+                            xtype:'label',
+                            locales:{
+                                text:'login.intro'
+                            }
+                        }
+                    ]
                 },
                 {
                     xtype:'form',
@@ -46,68 +186,7 @@ Ext.define('App.view.Login', {
                     defaults:{
                         labelWidth:85
                     },
-                    items:[
-                        {
-                            itemId:'userName',
-                            xtype:'textfield',
-                            fieldLabel:'Username',
-                            name:'userName',
-                            allowBlank:false,
-                            anchor:'100%',
-                            validateOnBlur:false
-                        },
-                        {
-                            xtype:'textfield',
-                            fieldLabel:'Password',
-                            name:'password',
-                            allowBlank:false,
-                            inputType:'password',
-                            anchor:'100%',
-                            validateOnBlur:false,
-                            enableKeyEvents:true,
-                            listeners:{
-                                render:{
-                                    fn:function (field, eOpts) {
-                                        field.capsWarningTooltip = Ext.create('Ext.tip.ToolTip', {
-                                            target:field.bodyEl,
-                                            anchor:'top',
-                                            width:305,
-                                            html:'Caps lock warning'
-                                        });
-
-                                        // disable to tooltip from showing on mouseover
-                                        field.capsWarningTooltip.disable();
-                                    },
-                                    scope:this
-                                },
-
-                                keypress:{
-                                    fn:function (field, e, eOpts) {
-                                        var charCode = e.getCharCode();
-                                        if ((e.shiftKey && charCode >= 97 && charCode <= 122) ||
-                                            (!e.shiftKey && charCode >= 65 && charCode <= 90)) {
-
-                                            field.capsWarningTooltip.enable();
-                                            field.capsWarningTooltip.show();
-                                        }
-                                        else {
-                                            if (field.capsWarningTooltip.hidden === false) {
-                                                field.capsWarningTooltip.disable();
-                                                field.capsWarningTooltip.hide();
-                                            }
-                                        }
-                                    },
-                                    scope:this
-                                },
-
-                                blur:function (field) {
-                                    if (field.capsWarningTooltip.hidden === false) {
-                                        field.capsWarningTooltip.hide();
-                                    }
-                                }
-                            }
-                        }
-                    ]
+                    items:items
                 }
             ],
             buttons:[
@@ -117,6 +196,9 @@ Ext.define('App.view.Login', {
                     action:"login",
                     formBind:true,
                     text:'Login',
+                    locales:{
+                        text:'login.Login'
+                    },
                     ref:'../loginAction',
                     iconCls:'form-login-icon-login',
                     scale:'medium',

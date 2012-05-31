@@ -9,7 +9,6 @@ Ext.define('Ext.ib.mixin.FieldCreator', {
      * Will create a form field from a model field
      *
      * @param (Ext.data.Field) field
-     *
      */
     getDefualtXtype:function(field){
 
@@ -34,11 +33,11 @@ Ext.define('Ext.ib.mixin.FieldCreator', {
         var ibOptions = field.ibOptions;
         if(Ext.isDefined(dest.label))
         {
-            return translate(dest.label);
+            return dest.label;
         }
         else if(Ext.isDefined(ibOptions.label))
         {
-            return translate(ibOptions.label);
+            return ibOptions.label;
         }else
         {
             return field.name;
@@ -81,9 +80,9 @@ Ext.define('Ext.ib.mixin.FieldCreator', {
                     case 'no':
                         break;
                     case 'yes':
-                        record.destroy(
-                        /* TODO: create working callback
-                        {callback :{
+                        record.destroy({
+                        // TODO: create working callback
+                        callback :{
                             success:function (rec, op) {
                                 Ext.create('widget.deletenotify', {response:op }).show();
                             },
@@ -92,7 +91,7 @@ Ext.define('Ext.ib.mixin.FieldCreator', {
                                 Ext.create('widget.errornotify', {response:op}).show();
                             }
                         }}
-                        */
+
                         );
                         store.load();
                         break;

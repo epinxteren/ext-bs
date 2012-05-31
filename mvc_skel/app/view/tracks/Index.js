@@ -14,6 +14,10 @@ Ext.define('App.view.tracks.Index', {
 
     closable:true,
 
+    locales : {
+        title : 'view.tracks.index.title'
+    },
+
     dockedItems:[
         {
             xtype:'AutoSearch',
@@ -23,11 +27,13 @@ Ext.define('App.view.tracks.Index', {
             xtype:'toolbar',
             dock:'top',
             items:[
-
                 {
                     xtype:'addbutton',
                     handler:function () {
-                        Ext.History.add('tracks/add', true);
+
+                        this.up("AutoGrid").editPopup('add');
+
+                        //Ext.History.add('tracks/add', true);
                     }
                 }
             ]

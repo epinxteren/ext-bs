@@ -15,7 +15,9 @@ Ext.define('Ext.ib.button.Base', {
     bindForm:true,
     iconCls:'',
     stateful:false,
-
+    locales : {
+        text : 'buttons.delete'
+    },
     /**
      * @cfg {Boolean} [setIconCls=true] when this is set to false no extra icon class is added
      */

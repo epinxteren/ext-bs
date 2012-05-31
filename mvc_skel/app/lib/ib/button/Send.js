@@ -11,5 +11,8 @@ Ext.define('Ext.ib.button.Send', {
     alias:'widget.sendbutton',
     text:'send',
     action:'send',
+    locales : {
+        text : 'buttons.send'
+    },
     formBind:true
 });

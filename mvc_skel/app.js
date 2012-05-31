@@ -2,10 +2,14 @@
 
 
 
+//Ux.locale.Overrides
 
 
 
-Ext.require('Ext.ib.IbReference',function(){
+
+Ext.require(['Ux.locale.Overrides'],function(){
+
+Ext.require(['Ext.ib.IbReference'],function(){
 
     Ext.require('Ext.ux.app.RoutedApplication', function () {
         App = Ext.create('Ext.ux.app.RoutedApplication', {
@@ -21,7 +25,7 @@ Ext.require('Ext.ib.IbReference',function(){
             requires:[
 
                 'App.view.Viewport',
-                'App.view.FormWindow',
+                'App.view.FormWindow'
 
             ],
 
@@ -31,6 +35,7 @@ Ext.require('Ext.ib.IbReference',function(){
                 // create Viewport instance
                 var viewport = Ext.create('App.view.Viewport', {
                     controller:this
+
                 });
 
                 // Get a reference to main TabPanel.  This is where top-level controllers will render themselves.
@@ -87,5 +92,7 @@ Ext.require('Ext.ib.IbReference',function(){
     });
 
 
+
+});
 
 });

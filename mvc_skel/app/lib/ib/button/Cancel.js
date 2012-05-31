@@ -18,5 +18,8 @@ Ext.define('Ext.ib.button.Cancel', {
 
         this.callParent();
     },
+    locales : {
+        text : 'buttons.cancel'
+    },
     action:'cancel'
 });

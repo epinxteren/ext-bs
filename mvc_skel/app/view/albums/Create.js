@@ -10,7 +10,6 @@ Ext.define('App.view.albums.Create', {
         {
             flex:1,
             addForm:true,
-            title:"Album",
             xtype:'AutoForm',
             store:'Albums'
         }

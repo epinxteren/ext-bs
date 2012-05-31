@@ -14,9 +14,9 @@ Ext.define('Ext.ib.component.ibOptions.Grid', {
     /**
      * @cfg {Boolean} inGridEditing can be edited inside the grid
      */
-    inGridEditing:false
+    inGridEditing:false,
 
 
-
+    enableLocale:true
 
 });

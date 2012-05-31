@@ -19,19 +19,29 @@ Ext.define('App.view.Header', {
             items:[
                 {
                     xtype:'container',
-                    html:'Logged in as',
+                    items:[{
+                      xtype:'label',
+                        locales : {
+                            text : 'login.Log_in_as'
+                        }
+                    }],
                     border:'none',
                     id:'loggedin'
                 },
                 {
-                    id:'logoutButton',
-                    xtype:'button',
-                    iconAlign:'right',
-                    iconCls:'logout',
-                    text:'Logout',
-                    margin:'5 0 0 0',
-                    action:'logout'
-                }
+                        flex:1,
+                        id:'logoutButton',
+                        xtype:'button',
+                        iconAlign:'right',
+                        iconCls:'logout',
+                        text:'Logout',
+                        locales : {
+                            text : 'login.Logout'
+                        },
+                        margin:'5 0 0 0',
+                        action:'logout'
+                 }
+
             ],
             border:'none'
         }

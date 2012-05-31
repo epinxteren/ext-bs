@@ -2,7 +2,7 @@
  * Obligatory textarea
  *
  */
-Ext.define('Ext.verz.form.field.ObligatoryArea', {
+Ext.define('Ext.ib.form.field.ObligatoryArea', {
         extend:'Ext.form.field.TextArea',
         alias:'widget.obligatoryarea',
         allowBlank:false,

@@ -17,7 +17,7 @@ Ext.define('Ext.ib.notify.Delete', {
         var msg = '';
         if (Ext.isEmpty(me.html)) {
 
-            msg =  this.translate('was_deleted');
+            msg =  this.translate('notify.was_deleted');
             me.html = msg;
         }
 

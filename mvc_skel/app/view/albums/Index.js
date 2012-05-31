@@ -1,7 +1,9 @@
 Ext.define('App.view.albums.Index', {
     extend:'Ext.ib.component.AutoGrid',
     alias:'widget.albums.Index',
-    title:"Albums grid",
+
+
+    hasInGridEditing:true,
 
     hasDeleteItems:true,
     hasEditItems:true,
@@ -9,6 +11,7 @@ Ext.define('App.view.albums.Index', {
     dispatch:"albums/",
 
     store:'Albums',
+
 
 
     closable:true,

@@ -7,12 +7,14 @@ Ext.define('Ext.ux.app.RoutedController', {
 	render: function(layoutName, component, config) {
 		var view = this.application.render(layoutName, this, component, config);
 		this.refCache[view.itemId] = view;
+
 		return view;
 	},
 	
 	addLayout: function(name, layout) {
 		this.application.addLayout(name, layout);
-	},	
+	},
+
 	getRef: function(ref, info, config) {
 		var cache = this.refCache[ref];
 		if (cache) {

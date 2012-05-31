@@ -2,8 +2,9 @@ Ext.define('Ext.ib.component.AutoSearch', {
     extend:'Ext.form.Panel',
     alias:'widget.AutoSearch',
 
-    title:translate('Searching'),
-
+    locales : {
+        title : 'components.autosearch.searching'
+    },
     mixins:{
         ModelIterator:'Ext.ib.mixin.ModelIterator',
         FieldCreator:'Ext.ib.mixin.FieldCreator',
@@ -39,8 +40,14 @@ Ext.define('Ext.ib.component.AutoSearch', {
                 });
         }
 
-
         me.callParent(arguments);
+    },
+
+
+    listeners:{
+        boxready:function (me) {
+            this.saveToMain();
+        }
     },
 
     /**
@@ -83,18 +90,20 @@ Ext.define('Ext.ib.component.AutoSearch', {
         var from = Ext.clone(filter);
         var to   = Ext.clone(filter);
 
+        this.createFilter(field,from);
         from.name       = field.name + '_from' ;
-        from.fieldLabel = translate(labelName + '_from');
-        this.setXType(field,from);
+        from.fieldLabel = labelName + '_from';
 
+        from.locales    = {
+            fieldLabel : from.fieldLabel
+        };
+
+        this.createFilter(field,to);
         to.name = field.name + '_until' ;
-        to.fieldLabel = translate(labelName + '_until');
-        this.setXType(field,to);
-
-        if(!Ext.isDefined(filter.obligated)){
-            from.allowBlank = true;
-            to.allowBlank = true;
-        }
+        to.fieldLabel = labelName + '_until';
+        to.locales    = {
+            fieldLabel : to.fieldLabel
+        };
 
         //ssetXType
         return [        {
@@ -108,7 +117,7 @@ Ext.define('Ext.ib.component.AutoSearch', {
 
 
 
-    createFilter:function (field,filter,ibOptions) {
+    createFilter:function (field,filter) {
         var me = this;
 
         me.setXType(field,filter);
@@ -117,15 +126,19 @@ Ext.define('Ext.ib.component.AutoSearch', {
 
         filter.fieldLabel= me.getLabelName(field,filter);
 
+        filter.locales    = {
+            fieldLabel : filter.fieldLabel
+        };
+
         if(!Ext.isDefined(filter.obligated))
         filter.allowBlank = true;
 
         if(!Ext.isDefined(filter.wildcard))
         filter.wildcard = true;
 
-
         return filter;
     },
+
 
     createFilterScreen:function(){
         var me = this;
@@ -162,9 +175,15 @@ Ext.define('Ext.ib.component.AutoSearch', {
     },
 
     search:function(){
+
+
         var me = this;
+
         var fields = me.getFields();
+
         me.filters = [];
+
+
         Ext.each(fields,function(field){
             var key = field.name;
             var value = field.getValue();
@@ -196,7 +215,7 @@ Ext.define('Ext.ib.component.AutoSearch', {
             handler:function (obj) {
                 var sp = obj.up('AutoSearch');
                 sp.getForm().reset();
-                sp.clearFilter(true);
+                sp.resetFilter();
             }
         },
         {

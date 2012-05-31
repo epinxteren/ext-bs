@@ -2,8 +2,8 @@
  * Obligatory textarea
  *
  */
-Ext.define('Ext.verz.form.field.ObligatoryComboBox', {
-        extend:'Ext.form.field.ComboBox',
+Ext.define('Ext.ib.form.field.ObligatoryComboBox', {
+        extend:'Ext.ib.field.ComboBox',
         alias:'widget.obligatorycombobox',
         allowBlank:false,
         afterLabelTextTpl :'<span class=\'x-label-obligatoryField\'></span>'

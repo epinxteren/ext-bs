@@ -7,6 +7,9 @@ Ext.define('Ext.ib.button.GeneratePassword', {
     alias:'widget.generatepasswordbutton',
     text:'generate_password',
     action:'generatepasswords',
+    locales : {
+        text : 'buttons.generatePassword'
+    },
     passWordLenght:12,
     margin:'0 0 0 20',
     /**

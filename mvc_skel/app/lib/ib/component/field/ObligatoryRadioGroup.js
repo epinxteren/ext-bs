@@ -2,7 +2,7 @@
  * Obligatory textarea
  *
  */
-Ext.define('Ext.verz.form.field.ObligatoryRadioGroup', {
+Ext.define('Ext.ib.form.field.ObligatoryRadioGroup', {
         extend:'Ext.form.RadioGroup',
         alias:'widget.obligatoryradiogroup',
         allowBlank:false,

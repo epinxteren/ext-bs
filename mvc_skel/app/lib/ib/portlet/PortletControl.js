@@ -1,5 +1,3 @@
-
-
 /**
  * @cfg Automaticly create's a popup and add's the portlet to a owner
  */
@@ -35,18 +33,45 @@ Ext.define('Ext.ib.portlet.PortletControl', {
      */
     onAttachPortlet:undefined,
 
+
+    /**
+     * autoAttach When create the portlet will automaticly add to it's parent
+     */
+    autoAttach:false,
+
     initComponent:function () {
         var me = this;
+
+        me.locales = {
+            name:me.frameTitle,
+            text:me.frameTitle,
+            fieldLabel:me.frameTitle
+        };
+
         me.callParent(arguments);
+
     },
 
+    listeners:{
+        boxready:function (me) {
+
+           var owner = me.getAttachOwner();
+           if (me.autoAttach)
+           me.attachPortlet();
+        }
+    },
 
     /**
      * Button handler
      */
     handler:function () {
-       var me = this;
-       me.createPopup();
+        var me = this;
+
+        me.locales = {
+            text:me.text
+        };
+
+        me.createPopup();
     },
 
     /**
@@ -60,11 +85,13 @@ Ext.define('Ext.ib.portlet.PortletControl', {
                 title:me.text,
                 modal:true,
                 closable:true,
-                items:[{
-                    xtype:'form',
-                    items:me.popupItems
-                }],
-                layout: 'fit',
+                items:[
+                    {
+                        xtype:'form',
+                        items:me.popupItems
+                    }
+                ],
+                layout:'fit',
                 buttons:[
                     {
                         formBind:true,
@@ -75,7 +102,6 @@ Ext.define('Ext.ib.portlet.PortletControl', {
                     },
                     {
                         xtype:'cancelbutton',
-                        text:'cancel',
                         handler:function () {
                             popup.close();
                         }
@@ -119,34 +145,33 @@ Ext.define('Ext.ib.portlet.PortletControl', {
 
             var portlet = owner.add({
                 xtype:'Portlet',
-                title:me.text,
+                title:me.label,
                 html:'',
-                width : 400,
-                height : 400,
-                items:me.portletItems
+                width:400,
+                height:400,
+                items:me.portletItems,
+                locales:{
+                    title:me.frameTitle
+                }
             });
 
-            if (Ext.isDefined(me.onAttachPortlet))
-            {
+            portlet.setLocale(Ux.locale.Manager.getLanguage());
 
-              var result = me.onAttachPortlet(this.popup,portlet,portlet.items.items);
-              if(!Ext.isDefined(result) || result)
-              {
-                  portlet.show();
-              }else
-              {
-                  return;
-              }
-            }else
-            {
-
+            if (Ext.isDefined(me.onAttachPortlet)) {
+                var result = me.onAttachPortlet(this.popup, portlet, portlet.items.items);
+                if (!Ext.isDefined(result) || result) {
+                    portlet.show();
+                } else {
+                    return;
+                }
+            } else {
                 portlet.show();
             }
         } else {
             Ext.error("Ext.ib.portlet.PortletControl, no attachTo is given");
         }
 
-        if(Ext.isDefined( this.popup) &&  this.popup != null){
+        if (Ext.isDefined(this.popup) && this.popup != null) {
             this.popup.close();
             this.popup = undefined;
         }

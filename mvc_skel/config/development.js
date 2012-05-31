@@ -2,21 +2,34 @@
 
 
 Ext.log = function () {
-    console.log.apply(console, arguments);
-}
-
-Ext.error = function () {
-
     if(Ext.isDefined(console))
     {
-        console.error.apply(console, arguments);
+        if(Ext.isDefined(console.log.apply))
+        console.log.apply(console, arguments);
+        else if(arguments.length == 1)
+        console.log(arguments[0]);
+        else
+        console.log(arguments);
     }
-}
+};
 
-/**
- * wrapper around console.warn for translations this can be turned on to show what
- * text is not yet translated
- */
-Ext.translationLog = function () {
-//    console.warn.apply(console, arguments);
-}
+Ext.error = function () {
+    if(Ext.isDefined(console.log.error))
+        console.error.apply(console, arguments);
+    else if(arguments.length == 1)
+        console.error(arguments[0]);
+    else
+        console.error(arguments);
+};
+
+
+Ext.warning = function () {
+    if(Ext.isDefined(console.log.warning))
+        console.warning.apply(console, arguments);
+    else if(arguments.length == 1)
+        console.warning(arguments[0]);
+    else
+        console.warning(arguments);
+};
+
+

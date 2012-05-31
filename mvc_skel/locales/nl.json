@@ -1,0 +1,110 @@
+{
+    "view":{
+        "dashboard":{
+            "index":{
+                "title":"bureaublad"
+            },
+            "portlets":{
+                "welcome":"Welkom",
+                "TrackPieChart":"TrackPieChart",
+                "Browser":"Internet pagina"
+            }
+        },
+        "tracks":{
+            "albumTitle":"Album titel",
+            "track":"track",
+            "addTrack":"Add track",
+            "index":{
+                "title":"Tracks grid"
+            }
+        },
+        "albums":{
+            "addAlbum":"Album toevoegen",
+            "album":"album",
+            "otherAlbums":"otherAlbums",
+            "index":{
+                "title":"Albums grid"
+            }
+        },
+        "artists":{
+            "index":{
+                "title":"Artist grid"
+            }
+        }
+    },
+    "model":{
+        "track":{
+
+            "albumTitle":"Album titel",
+            "name":"Name",
+            "duration":"Duration",
+            "duration_from":"Duration from",
+            "duration_until":"Duration until",
+            "unit_price":"Unit price",
+            "bytes":"Bytes"
+        },
+        "album":{
+            "artistName":"Naam artiest",
+            "title":"Titel",
+            "otherAlbums":"Aantal andere albums"
+        },
+        "artist":{
+            "name":"Name"
+        }
+    },
+    "buttons":{
+        "cancel":"Annuleren",
+        "save":"Opslaan",
+        "done":"Klaar",
+        "add":"Toevoegen",
+        "delete":"Verwijderen",
+        "export":"Export",
+        "generatePassword":"Paswoord genereren",
+        "next":"Volgende",
+        "previos":"Vorige",
+        "reset":"Herstel",
+        "search":"Zoeken"
+
+    },
+    "navigation":{
+        "collapse_all":"Inklappen",
+        "expand_all":"Uitklappen",
+        "menu":"Menu"
+    },
+    "components":{
+         "add":"Toevoegen",
+         "edit":"Bewerk",
+         "grid":"Grid",
+         "detail":"Detail",
+         "autosearch":{
+                "searching":"Zoeken"
+         }
+    },
+
+    "notify":{
+        "was_saved":"is opgeslagen",
+        "where_saved":"zijn saved",
+        "was_deleted":"is verwijderd ",
+        "download_link":"download link",
+        "with_error":"met foutmelding",
+        "unknown":"onbekend",
+        "was_succesfully_uploaded":"is succesvol geüpload",
+        "file_was_uploaded":"bestand is geüpload"
+    },
+
+
+    "fields":{
+        "name":"Naam"
+    },
+
+    "login":{
+       "intro":"Welkom",
+       "username":"Naam",
+       "Login":"Login",
+       "Log_in_as":"Ingelogd als:",
+       "Logout":"Uitloggen",
+       "Password":"Paswoord",
+       "chooselanguage":"Kies taal"
+    }
+
+}

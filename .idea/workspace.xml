@@ -4,7 +4,98 @@
     <bookmark url="file://$PROJECT_DIR$/mvc_skel/app/model/Track.js" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cff52229-ede8-40b2-8138-758a974d46a9" name="Default" comment="" />
+    <list default="true" id="cff52229-ede8-40b2-8138-758a974d46a9" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mvc_skel/app/data/groups.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mvc_skel/app/data/persons.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/PopUp.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/button/Update.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/component/AutoFormWindow.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/mixin/ComponentAutoName.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ux/locale/Manager.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ux/locale/Overrides.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ux/locale/override/extjs/Button.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ux/locale/override/extjs/Component.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ux/locale/override/extjs/FieldContainer.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ux/locale/override/extjs/Label.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ux/locale/override/extjs/MenuItem.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ux/locale/override/extjs/Panel.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ux/locale/override/extjs/Text.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ux/locale/override/extjs/Window.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ux/locale/override/grid/GridColumn.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ux/locale/override/st/Button.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ux/locale/override/st/Component.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ux/locale/override/st/Container.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ux/locale/override/st/TitleBar.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ux/locale/override/st/field/Field.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ux/locale/override/st/form/FieldSet.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ux/locale/override/st/picker/Picker.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ux/locale/override/ux/RoutedController.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mvc_skel/app/view/dashboard/portlets/Welcome.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mvc_skel/locales/en.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mvc_skel/locales/fr.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mvc_skel/locales/nl.json" />
+      <change type="DELETED" beforePath="C:\wamp\www\ext-bslm\mvc_skel\app\data\ChinookData.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app.js" afterPath="$PROJECT_DIR$/mvc_skel/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/controller/Albums.js" afterPath="$PROJECT_DIR$/mvc_skel/app/controller/Albums.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/controller/Login.js" afterPath="$PROJECT_DIR$/mvc_skel/app/controller/Login.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/IbReference.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/IbReference.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/Model.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/Model.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/Store.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/Store.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/button/Add.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/button/Add.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/button/Base.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/button/Base.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/button/Cancel.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/button/Cancel.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/button/Delete.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/button/Delete.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/button/Export.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/button/Export.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/button/GeneratePassword.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/button/GeneratePassword.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/button/Next.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/button/Next.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/button/Previous.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/button/Previous.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/button/Reset.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/button/Reset.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/button/Save.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/button/Save.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/button/Search.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/button/Search.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/button/Send.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/button/Send.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/component/AutoSearch.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/component/AutoSearch.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/component/field/FieldComboBox.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/component/field/FieldComboBox.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/component/field/FieldText.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/component/field/FieldText.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/component/field/Logo.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/component/field/Logo.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/component/field/MultiFileUpload.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/component/field/MultiFileUpload.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/component/field/ObligatoryArea.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/component/field/ObligatoryArea.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/component/field/ObligatoryComboBox.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/component/field/ObligatoryComboBox.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/component/field/ObligatoryEmail.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/component/field/ObligatoryEmail.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/component/field/ObligatoryNumber.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/component/field/ObligatoryNumber.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/component/field/ObligatoryRadioGroup.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/component/field/ObligatoryRadioGroup.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/component/field/ObligatoryText.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/component/field/ObligatoryText.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/data/Writer.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/data/Writer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/mixin/FieldCreator.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/mixin/FieldCreator.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/mixin/Filter.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/mixin/Filter.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/mixin/ModelIterator.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/mixin/ModelIterator.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/notify/Base.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/notify/Base.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/notify/Delete.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/notify/Delete.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/notify/Download.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/notify/Download.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/notify/Error.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/notify/Error.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/notify/Save.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/notify/Save.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/notify/Upload.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/notify/Upload.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ib/portlet/PortletControl.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ib/portlet/PortletControl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/lib/ux/app/RoutedController.js" afterPath="$PROJECT_DIR$/mvc_skel/app/lib/ux/app/RoutedController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/model/Album.js" afterPath="$PROJECT_DIR$/mvc_skel/app/model/Album.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/model/Artist.js" afterPath="$PROJECT_DIR$/mvc_skel/app/model/Artist.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/model/Track.js" afterPath="$PROJECT_DIR$/mvc_skel/app/model/Track.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/view/Header.js" afterPath="$PROJECT_DIR$/mvc_skel/app/view/Header.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/view/Login.js" afterPath="$PROJECT_DIR$/mvc_skel/app/view/Login.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/view/Navigation.js" afterPath="$PROJECT_DIR$/mvc_skel/app/view/Navigation.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/view/Viewport.js" afterPath="$PROJECT_DIR$/mvc_skel/app/view/Viewport.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/view/albums/Create.js" afterPath="$PROJECT_DIR$/mvc_skel/app/view/albums/Create.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/view/albums/Edit.js" afterPath="$PROJECT_DIR$/mvc_skel/app/view/albums/Edit.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/view/albums/Index.js" afterPath="$PROJECT_DIR$/mvc_skel/app/view/albums/Index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/view/artists/Index.js" afterPath="$PROJECT_DIR$/mvc_skel/app/view/artists/Index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/view/components/tracks/TrackPieChart.js" afterPath="$PROJECT_DIR$/mvc_skel/app/view/components/tracks/TrackPieChart.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/view/dashboard/Index.js" afterPath="$PROJECT_DIR$/mvc_skel/app/view/dashboard/Index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/view/dashboard/portlets/Browser.js" afterPath="$PROJECT_DIR$/mvc_skel/app/view/dashboard/portlets/Browser.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/view/dashboard/portlets/TrackPieChart.js" afterPath="$PROJECT_DIR$/mvc_skel/app/view/dashboard/portlets/TrackPieChart.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/app/view/tracks/Index.js" afterPath="$PROJECT_DIR$/mvc_skel/app/view/tracks/Index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/config/config.js" afterPath="$PROJECT_DIR$/mvc_skel/config/config.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/config/development.js" afterPath="$PROJECT_DIR$/mvc_skel/config/development.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc_skel/config/environment.js" afterPath="$PROJECT_DIR$/mvc_skel/config/environment.js" />
+    </list>
     <ignored path="ext-bs.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -135,7 +226,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="locales" />
+              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -154,6 +245,36 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ux" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ext-bs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ext-bslm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mvc_skel" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -176,6 +297,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="data" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ext-bs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ext-bslm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mvc_skel" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -242,10 +385,10 @@
     <editor active="false" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26980942" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26980942" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33204633" sideWeight="0.7301906" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33204633" sideWeight="0.7301906" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />

@@ -7,5 +7,8 @@ Ext.define('Ext.ib.button.Save', {
     alias:'widget.savebutton',
     text:'save',
     action:'save',
+    locales : {
+        text : 'buttons.save'
+    },
     formBind:true
 });

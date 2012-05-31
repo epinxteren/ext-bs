@@ -1,5 +1,3 @@
-
-
 /*
  * Is a {Ext.grid.Panel} that can create a grid from a store model fields
  */
@@ -12,17 +10,14 @@ Ext.define('Ext.ib.component.AutoGrid', {
     mixins:{
         ModelIterator:'Ext.ib.mixin.ModelIterator',
         FieldCreator:'Ext.ib.mixin.FieldCreator',
-        Filter:'Ext.ib.mixin.Filter'
+        Filter:'Ext.ib.mixin.Filter',
+        AutoName:'Ext.ib.mixin.ComponentAutoName'
     },
-
 
     /**
      * @cfg {String} Basic dispatch name
      */
     dispatch:'',
-
-
-    idField:'id',
 
     /**
      * @cfg {String} Name of grid
@@ -76,9 +71,14 @@ Ext.define('Ext.ib.component.AutoGrid', {
     editDispatch:'edit',
 
     /**
+     * @cfg {Boolean=true} hasAutoTitle If this get's it's title form it's model
+     */
+    hasAutoTitle:true,
+
+    /**
      * @cfg {Boolean} If the grid has some ingrid editing
      */
-    hasInGridEditing:true,
+    hasInGridEditing:false,
 
     /**
      * @cfg {Boolean} Detail edit option
@@ -90,15 +90,27 @@ Ext.define('Ext.ib.component.AutoGrid', {
      */
     detailDispatch:'detail/',
 
+    /**
+     * @cfg {String} popupTitleEdit  The title name for the edit popups
+     */
+    popupTitleEdit:'',
 
-    hasEditPopupForm:false,//TODO:Create edit popup
+    /**
+     * @cfg {String} popupTitleDetail The title name for the detail popups
+     */
+    popupTitleDetail:'',
+
+    /**
+     * @cfg {String} The dispatch name for detail  dispatch + detailDispatch
+     */
+    hasEditPopupForm:false,
 
     flex:1,
 
     /**
      * @cfg {Boolean}  Enable collom sortable for all fields
      */
-    sortable:false,
+    sortable:true,
 
     /**
      * @event
@@ -106,13 +118,31 @@ Ext.define('Ext.ib.component.AutoGrid', {
      */
     onSelectionChange:undefined,
 
-
-    refresh:function()
-    {
+    refresh:function () {
         var me = this;
         var store = Ext.getStore(me.store);
         var current = store.currentPage;
         store.loadPage(current);
+    },
+
+    editPopup:function (type, rowIndex) {
+        var store = Ext.getStore(this.store);
+
+        var params = {renderType:type, id:this.id + type + 'Window', store:this.store, autoFill:true, prefix:this.prefix};
+
+        if(type  === "edit")
+        {
+
+            var recordId = Ext.getStore(this.store).getAt(rowIndex).get(this.getModelSettings().idProperty);
+            params.editForm  = true;
+            params.loadItemId = recordId;
+        }else
+        {
+            params.addForm  = true;
+        }
+
+        Ext.Object.merge(params, this.popupOpts);
+        Ext.widget('AutoFormWindow', params).show();
     },
 
     initComponent:function () {
@@ -127,7 +157,13 @@ Ext.define('Ext.ib.component.AutoGrid', {
 
         me.initBarOptions();
 
+        me.clearFilter(false);
+
         me.enableFilter();
+
+
+        if(me.hasAutoTitle)
+            me.initAutoLocal('grid','title');
 
         /* Lisseners */
         me.listeners = {
@@ -152,16 +188,16 @@ Ext.define('Ext.ib.component.AutoGrid', {
     showEditAction:function (grid, rowIndex) {
         var store = grid.getStore();
         if (this.hasEditPopupForm) {
-            this.editPopup('edit', store, rowIndex);
+            this.editPopup('edit', rowIndex);
         } else {
             var rec = store.getAt(rowIndex);
-            var id = rec.get(this.idField);
+            var id = rec.get(this.getModelSettings().idProperty);
 
 
-           // Ext.ibDispatch(this.dispatch+this.editDispatch,{id:id});
+            // Ext.ibDispatch(this.dispatch+this.editDispatch,{id:id});
 
-            Ext.History.add(this.dispatch+this.editDispatch+"/" + id, true);
-           // Ext.dispatch(this.dispatch+this.editDispatch+"/"+id);
+            Ext.History.add(this.dispatch + this.editDispatch + "/" + id, true);
+            // Ext.dispatch(this.dispatch+this.editDispatch+"/"+id);
         }
     },
 
@@ -173,15 +209,14 @@ Ext.define('Ext.ib.component.AutoGrid', {
     showDetailAction:function (grid, rowIndex) {
         var store = grid.getStore();
         if (this.hasEditPopupForm) {
-            this.editPopup('detail', store, rowIndex);
+            this.editPopup('detail', rowIndex);
         } else {
 
             var rec = store.getAt(rowIndex);
-            var id = rec.get(this.idField);
+            var id = rec.get(this.getModelSettings().idProperty);
 
             //Ext.dispatch(this.dispatch+this.detailDispatch + id);
-            Ext.History.add(this.dispatch+this.detailDispatch + id, true);
-
+            Ext.History.add(this.dispatch + this.detailDispatch + id, true);
         }
     },
 
@@ -199,15 +234,19 @@ Ext.define('Ext.ib.component.AutoGrid', {
             var editable = Ext.isDefined(field.ibOptions.form);
             var ibOptions = field.ibOptions;
 
-            var column = Ext.create('Ext.ib.component.ibOptions.Grid',grid);
-
+            var column = Ext.create('Ext.ib.component.ibOptions.Grid', grid);
 
             column.flex = Ext.isDefined(grid.flex) ? grid.flex : 1;
 
-            column.text =  me.getLabelName(field,grid);
+            column.text = me.getLabelName(field, grid);
+
+            column.locales = {
+                text:column.text
+            };
+
 
             column.dataIndex = field.name;
-            column.sortable  = Ext.isDefined(grid.sortable) ? grid.sortable : false;
+            column.sortable = Ext.isDefined(grid.sortable) ? grid.sortable : false;
 
             if (Ext.isDefined(grid.renderer))
                 column.renderer = grid.renderer;
@@ -233,24 +272,25 @@ Ext.define('Ext.ib.component.AutoGrid', {
             }
         });
 
-        if (me.hasEditItems) {
-            me.rowEditing = Ext.create('Ext.grid.plugin.RowEditing',{listeners:{edit:function(editor,e){
-                    //debugger;
-                    if(me.hasAutoSyncItems)
-                    {
-                        e.record.save({
-                            success:function (rec, op) {
-                                Ext.create('widget.savenotify', {response:op, titleField:me.titleField, idField:me.idField }).show();
-                            },
-                            failure:function (rec, op) {
-                                Ext.create('widget.errornotify', {response:op}).show();
-                            }
-                        });
-                    }else
-                    {
-                        me.down('#updateButton').setDisabled(false);
-                    }
-            }},autoCancel: false, clicksToEdit:2});
+
+
+        if (me.hasEditItems && me.hasInGridEditing) {
+            me.rowEditing = Ext.create('Ext.grid.plugin.RowEditing', {listeners:{edit:function (editor, e) {
+                if (me.hasAutoSyncItems) {
+                    e.record.save({
+                        success:function (rec, op) {
+
+
+                            Ext.create('widget.savenotify', {response:op, titleField:me.getModelSettings().titleField, idField:me.getModelSettings().idProperty }).show();
+                        },
+                        failure:function (rec, op) {
+                            Ext.create('widget.errornotify', {response:op}).show();
+                        }
+                    });
+                } else {
+                    me.down('#updateButton').setDisabled(false);
+                }
+            }}, autoCancel:false, clicksToEdit:2});
 
             me.plugins.push(me.rowEditing);
         }
@@ -267,12 +307,8 @@ Ext.define('Ext.ib.component.AutoGrid', {
         me.columns = columns;
     },
 
-
-
-
-
     addActionColumn:function () {
-        var me =  this;
+        var me = this;
 
         var items = this.gridActionColumnItems || [];
 
@@ -305,17 +341,16 @@ Ext.define('Ext.ib.component.AutoGrid', {
                 tooltip:translate('delete'),
                 handler:function (grid, rowIndex) {
                     var rec = grid.getStore().getAt(rowIndex);
-                    me.requistDeleteRecord(rec,me.getStore());
+                    me.requistDeleteRecord(rec, me.getStore());
                 }
             })
         }
         //number of items times icon width plus padding
         var width = items.length * (16 + 6);
 
-        if(items.length != 0){
+        if (items.length != 0) {
             this.actionColumns = {xtype:"actioncolumn", items:items, width:width};
             this.columns.push(this.actionColumns);
-            //debugger;
         }
     },
 
@@ -323,16 +358,13 @@ Ext.define('Ext.ib.component.AutoGrid', {
         var me = this;
 
         var addButton = {
-            text:'Add',
-            tooltip:'Add a new row',
-            iconCls:'add',
+            xtype:'addbutton',
             listeners:{
-                click:function(){
-                    if(me.rowEditing.editing)
+                click:function () {
+                    if (me.rowEditing.editing)
                         return false;
-
                     var store = me.getStore();
-                    var model = Ext.ModelManager.create({ },store.model);
+                    var model = Ext.ModelManager.create({ }, store.model);
                     store.add(model);
                     me.rowEditing.startEdit(model, 0);
                 }
@@ -340,32 +372,25 @@ Ext.define('Ext.ib.component.AutoGrid', {
         };
 
         var removeButton = {
-            itemId:"removeButton",
-            text:'Remove',
-            tooltip:'Remove the selected item',
-            iconCls:'remove',
+            xtype:'deletebutton',
             disabled:true,
             listeners:{
                 click:function () {
                     var store = me.getStore();
                     var selection = me.getSelectionModel().getSelection();
-                    if(selection.length == 1)
-                    me.requistDeleteRecord(selection[0],store);
-
+                    if (selection.length == 1)
+                        me.requistDeleteRecord(selection[0], store);
                 }
             }
         };
 
         var updateButton = {
             itemId:"updateButton",
-            text:'Update',
-            tooltip:'Update edited items',
-            iconCls:'update',
+            xtype:'updatebutton',
             disabled:true,
             listeners:{
                 click:function () {
                     var store = me.getStore();
-
                     store.commitChanges();
                     store.sync();
                     me.down('#updateButton').setDisabled(true);
@@ -393,7 +418,7 @@ Ext.define('Ext.ib.component.AutoGrid', {
             items:[]
         });
 
-        //debugger;
+
         if (topBar.length != 0)
             me.tbar = topBar;
 

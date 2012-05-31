@@ -1,7 +1,7 @@
 /**
  * Component to make multi file upload possible
  */
-Ext.define('Ext.verz.form.field.MultiFileUpload', {
+Ext.define('Ext.ib.form.field.MultiFileUpload', {
     extend:'Ext.panel.Panel',
     alias:'widget.multifileupload',
 

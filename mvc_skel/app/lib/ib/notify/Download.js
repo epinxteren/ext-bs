@@ -7,7 +7,7 @@ Ext.define('Ext.ib.notify.Download', {
     alias:'widget.downloadnotify',
     title:'download',
     autoHide:false,
-    linkText:'download_link',
+    linkText:'notify.download_link',
 
     initComponent:function () {
         var me = this;

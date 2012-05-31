@@ -29,7 +29,7 @@ Ext.define('Ext.ib.component.field.FieldComboBox', {
         var params = {},
             param = this.queryParam;
 
-        if (param) {
+        if (param && Ext.isDefined(this.queryFilterField)) {
             params[param] = {};
             params[param][param] = {};
             params[param][param][this.queryFilterField] = queryString;

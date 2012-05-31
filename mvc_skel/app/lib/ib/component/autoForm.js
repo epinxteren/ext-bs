@@ -9,10 +9,16 @@ Ext.define('Ext.ib.component.AutoForm', {
 
     mixins:{
         ModelIterator:'Ext.ib.mixin.ModelIterator',
-        FieldCreator:'Ext.ib.mixin.FieldCreator'
+        FieldCreator:'Ext.ib.mixin.FieldCreator',
+        AutoName:'Ext.ib.mixin.ComponentAutoName'
     },
 
     layout:'anchor',
+
+    /**
+     * @cfg {Boolean=true} hasAutoTitle If this get's it's title form it's model
+     */
+    hasAutoTitle:true,
 
     /**
      * @cfg {Boolean} If this forum is a form that add's records to it's store
@@ -29,15 +35,6 @@ Ext.define('Ext.ib.component.AutoForm', {
      */
     loadItemId:undefined,
 
-    /**
-     * @cfg {String} [idField=id] the field the id for the record can be found in
-     */
-    idField:'id',
-
-    /**
-     * @cgf {String} [titleField=title] The field the title can be found in
-     */
-    titleField:'title',
 
     /**
      * @cgf {boolean} [hasDeleteItem=false] Add's a button to delete the record
@@ -52,6 +49,9 @@ Ext.define('Ext.ib.component.AutoForm', {
 
         var store = Ext.getStore(me.store);
 
+        var model = store.model;
+
+
         me.modelForEach(function (field, index) {
             var form = field.ibOptions.form;
             var ibOptions = field.ibOptions;
@@ -65,6 +65,10 @@ Ext.define('Ext.ib.component.AutoForm', {
                 form.flex = 1;
 
             form.fieldLabel = me.getLabelName(field,form);
+
+            form.locales    = {
+                fieldLabel : form.fieldLabel
+            };
 
             if (!Ext.isDefined(form.name))
                 form.name = field.name;
@@ -91,10 +95,20 @@ Ext.define('Ext.ib.component.AutoForm', {
 
         me.initBarOptions();
 
+        if(me.hasAutoTitle){
+
+            if(this.editForm)
+            this.initAutoLocal('edit','title');
+            if(this.addForm)
+            this.initAutoLocal('add','title');
+        }
+
+
         me.initLisseners();
 
         me.callParent(arguments);
     },
+
 
     initLisseners:function () {
         var me = this;
@@ -113,8 +127,21 @@ Ext.define('Ext.ib.component.AutoForm', {
                         me.loadRecord(item);
                     }else
                     {
+                        //Filter for the id
+                        store.addListener('load',function(){
+                            var item = store.getById(me.loadItemId);
+                            if (Ext.isDefined(item) && item != null)
+                            {
+                                me.loadRecord(item);
+                            }else
+                            {
+                                Ext.error("Record not found "+me.loadItemId);
+                            }
+                            store.clearFilter();
+                        },this,{single:true});
 
-
+                        var newFilter =Ext.create('Ext.util.Filter',   {property:me.getModelSettings().idProperty, value:me.loadItemId});
+                        store.filter([newFilter ]);
                     }
                 },
                 scope:me
@@ -130,7 +157,6 @@ Ext.define('Ext.ib.component.AutoForm', {
 
 
         var removeButton = {
-            text:'Delete',
             xtype:'deletebutton',
             handler:function () {
                 var objForm = this.up('form').getForm();
@@ -154,10 +180,12 @@ Ext.define('Ext.ib.component.AutoForm', {
         ////////////////////////////////////////
         //Buttons
         ////////////////////////////////////////
-        var bottomBar = [];
+        var bottomBar = me.buttons || [];
+
+        if(Ext.isDefined(me.buttons))
+        me.buttons = undefined;
 
         var saveButton = {
-            text:'Save',
             xtype:'savebutton',
             handler:function () {
                 var objForm = this.up('form').getForm();
@@ -172,7 +200,7 @@ Ext.define('Ext.ib.component.AutoForm', {
                         store.add(objModel);
                         objModel.save({
                             success:function (rec, op) {
-                                Ext.create('widget.savenotify', {response:op, titleField:me.titleField, idField:me.idField }).show();
+                                Ext.create('widget.savenotify', {response:op, titleField:me.getModelSettings().titleField, idField:me.getModelSettings().idProperty}).show();
                             },
                             failure:function (rec, op) {
                                 Ext.create('widget.errornotify', {response:op}).show();
@@ -181,12 +209,12 @@ Ext.define('Ext.ib.component.AutoForm', {
                     }
                     if (me.editForm) {
                         var objModel = Ext.ModelManager.create({ }, store.model);
-                        objForm.updateRecord(objModel);
-                        record = store.getById(objModel.get(me.idField));
                         objForm.updateRecord(record);
+                        //record = store.getById(objModel.get(me.getModelSettings().idProperty));
+                        //objForm.updateRecord(record);
                         record.save({
                             success:function (rec, op) {
-                                Ext.create('widget.savenotify', {response:op, titleField:me.titleField, idField:me.idField }).show();
+                                Ext.create('widget.savenotify', {response:op,  titleField:me.getModelSettings().titleField, idField:me.getModelSettings().idProperty }).show();
                             },
                             failure:function (rec, op) {
                                 Ext.create('widget.errornotify', {response:op}).show();

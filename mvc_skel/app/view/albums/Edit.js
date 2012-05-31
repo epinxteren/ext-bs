@@ -13,7 +13,6 @@ Ext.define('App.view.albums.Edit', {
                 loadItemId:me.itemId,
                 flex:1,
                 editForm:true,
-                title:"Album",
                 xtype:'AutoForm',
                 store:'Albums'
             },
@@ -26,11 +25,11 @@ Ext.define('App.view.albums.Edit', {
                 },
                 items:[
                     {
-                        filters:[{
+                        mainFilters:[{
                             property:"album",
                             value:me.itemId
                         }],
-                        title:'Albums tracks',
+                        hasEditPopupForm:true,
                         xtype:'tracks.Index',
                         flex:1
                     }

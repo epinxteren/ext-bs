@@ -3,6 +3,9 @@ Ext.define('App.view.artists.Index', {
     alias:'widget.artists.Index',
     title:'Artists Grid',
 
+
+    hasInGridEditing:true,
+
     hasDeleteItems:true,
     hasEditItems:true,
     dispatch:"artists/",

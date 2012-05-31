@@ -12,9 +12,9 @@ Ext.define('Ext.ib.notify.Upload', {
         var me = this;
 
         if (typeof(me.response.result) != 'undefined') {
-            me.html = me.response.result[this.fileField] + this.translate('was_succesfully_uploaded');
+            me.html = me.response.result[this.fileField] + this.translate('notify.was_succesfully_uploaded');
         } else {
-            me.html = this.translate('file_was_uploaded');
+            me.html = this.translate('notify.file_was_uploaded');
         }
 
         this.callParent(arguments);

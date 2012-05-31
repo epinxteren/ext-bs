@@ -1,0 +1,58 @@
+{
+    "view":{
+        "dashboard":{
+            "index":{
+                "title":"Dashboard FRA"
+            },
+            "portlets":{
+                "welcome":"Welcome FRA"
+            }
+        },
+        "tracks":{
+            "index":{
+                "title":"Tracks grid FRA"
+            }
+        },
+        "albums":{
+            "index":{
+                "title":"Albums grid FRA"
+            }
+        },
+        "artists":{
+            "index":{
+                "title":"Artist grid FRA"
+            }
+        }
+    },
+    "model":{
+        "track":{
+            "name":"Name FRA",
+            "duration":"Duration FRA",
+            "duration_from":"Duration from FRA",
+            "duration_to":"Duration to FRA",
+            "unit_price":"Unit price FRA",
+            "bytes":"Bytes FRA"
+        },
+        "album":{
+            "title":"Title FRA"
+        },
+        "artist":{
+            "name":"Name FRA"
+        }
+    },
+    "buttons":{
+        "cancel":"Cancel FRA",
+        "save":"Save FRA",
+        "done":"Done FRA",
+        "add":"Add FRA",
+        "delete":"Delete FRA",
+        "export":"Export FRA",
+        "generatePassword":"Generate password FRA",
+        "next":"Next FRA",
+        "previos":"Previos FRA",
+        "reset":"Reset FRA",
+        "search":"Search FRA",
+        "reset":"Reset FRA"
+    },
+
+}

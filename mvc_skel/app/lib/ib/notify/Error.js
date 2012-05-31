@@ -14,7 +14,7 @@ Ext.define('Ext.ib.notify.Error', {
     initComponent:function () {
         var me = this;
 
-        var msg = translate(me.message) + '<br><b>' + translate('with_error') + ':</b><br>';
+        var msg = translate(me.message) + '<br><b>' + translate('notify.with_error') + ':</b><br>';
         if (me.response != null) {
             if (typeof(me.response.error) != 'undefined') {
                 msg = msg + me.response.error.status + ': ' + me.response.error.statusText;
@@ -24,7 +24,7 @@ Ext.define('Ext.ib.notify.Error', {
                 msg = msg + me.response.response.status + ': ' + me.response.response.statusText;
             }
         } else {
-            msg = msg + ' ' + translate('unknown');
+            msg = msg + ' ' + translate('notify.unknown');
         }
 
         me.html = msg;

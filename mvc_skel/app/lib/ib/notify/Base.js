@@ -39,10 +39,7 @@ Ext.define('Ext.ib.notify.Base', {
      * @return (String} translated text or orginal text
      */
     translate:function (text) {
-        if (typeof(translate) == 'function') {
-            return translate(text);
-        }
-        return text;
+        return Ux.locale.Manager.get(text,text);
     },
 
     initComponent:function () {

@@ -2,7 +2,7 @@
  * Obligatory text
  *
  */
-Ext.define('Ext.verz.form.field.ObligatoryText', {
+Ext.define('Ext.ib.form.field.ObligatoryText', {
         extend:'Ext.form.field.Text',
         alias:'widget.obligatorytext',
         allowBlank:false,

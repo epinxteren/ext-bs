@@ -6,12 +6,11 @@ Ext.define('Ext.ib.mixin.ModelIterator', {
     /*
      *Check if the obj is accepted by the pasfilter
      *
-     *pasfilter example:
-     *
+     *@example
      *{
-     *  name:undifined,//obj.name must excist, but can have any value
-     *  values:{//values property must excist
-     *      show:true //obj.values.show must have the same value, For this example: 'true'
+     *  name:undifined,         //obj.name must excist, but can have any value
+     *  values:{                //values property must excist
+     *      show:true           //obj.values.show must have the same value, For this example: 'true'
      *  }
      *}
      *
@@ -42,13 +41,24 @@ Ext.define('Ext.ib.mixin.ModelIterator', {
         }   
         return true;    
     },
-    
-   
+
+
+    getModel:function()
+    {
+
+
+        return Ext.getStore(this.store).model;
+    },
+
+    getModelSettings:function()
+    {
+        return Ext.getStore(this.store).model.prototype;
+    },
+
     modelForEach:function(func,pasFilter /* Object */)
     {
-        var me = this;        
-        var store  = Ext.getStore(me.store);           
-        var fields = store.model.getFields();     
+        var me = this;
+        var fields = me.getModel().getFields();
         for(var i = 0; i < fields.length;i++)
         {
             if(this.acceptFilter(fields[i],pasFilter)){                

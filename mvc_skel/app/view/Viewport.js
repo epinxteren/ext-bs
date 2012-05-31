@@ -39,9 +39,10 @@ Ext.define('App.view.Viewport', {
                 }
             ]
         }
-
-
-    ]
-
+    ],
+    listeners : {
+        scope       : Ux.locale.Manager,
+        afterrender : Ux.locale.Manager.init
+    }
 
 });

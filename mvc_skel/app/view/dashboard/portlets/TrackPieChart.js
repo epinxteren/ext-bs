@@ -7,12 +7,12 @@ Ext.define('App.view.dashboard.portlets.TrackPieChart', {
 
     alias:'widget.portlet.TrackPieChart',
 
-    text:translate('TrackPieChart'),
+    frameTitle:"view.dashboard.portlets.TrackPieChart",
 
     popupItems:[{
         width:500,
         xtype:'FieldComboBox',
-        flex:1,
+        //flex:1,
         store:'Albums',
         displayField:'title',
         valueField:'id'
@@ -24,6 +24,8 @@ Ext.define('App.view.dashboard.portlets.TrackPieChart', {
     }],
 
     onAttachPortlet:function(pupup, portlet,items){
+        portlet.setWidth(600);
+
         var box = pupup.down('FieldComboBox');
         var valueId = box.getValue();
         if(!isNaN(valueId))

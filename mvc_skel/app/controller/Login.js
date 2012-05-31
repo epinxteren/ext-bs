@@ -1,8 +1,5 @@
-
-
-
 Ext.define('App.controller.Login', {
-    extend: 'Ext.ib.controller.Base',
+    extend:'Ext.ib.controller.Base',
     init:function () {
         this.control({
             'viewport':{
@@ -37,10 +34,8 @@ Ext.define('App.controller.Login', {
         console.log('Index function');
         var loginWin = Ext.create('App.view.Login');
         loginWin.show();
-
         this.login();
     },
-
     login:function () {
 
 
@@ -53,24 +48,42 @@ Ext.define('App.controller.Login', {
 
         //@todo this hould ofcourse be better implemented with at least a check with the webservices if somebody is realy logged in
         //but for now just check the cookies
-        if(Ext.util.Cookies.get('username') != '' && Ext.util.Cookies.get('username') != null && Ext.util.Cookies.get('token') != '' && Ext.util.Cookies.get('token') != null)
-        {
-            lay.setActiveItem(1);
-            win.hide();
-            Ext.getCmp('loggedin').update('Logged in as:' + ' <b>' + Ext.util.Cookies.get('username') + '</b>');
+        if (Ext.util.Cookies.get('username') != '' && Ext.util.Cookies.get('username') != null && Ext.util.Cookies.get('token') != '' && Ext.util.Cookies.get('token') != null) {
+
+            this.loadTranslation(function(){
+                lay.setActiveItem(1);
+                win.hide();
+                Ext.getCmp('loggedin').update(' <b>' + Ext.util.Cookies.get('username') + '</b>');
+            });
+
             return;
         }
         lay.setActiveItem(0);
 
-
         if (values.userName == 'admin') {
-            var lay = this.getViewport().getLayout();
-            lay.setActiveItem(1);
-            win.hide();
-            Ext.util.Cookies.set('username', values.userName);
-            Ext.util.Cookies.set('token', 'some token');
-            Ext.getCmp('loggedin').update('Logged in as: ' + ' <b>' + values.userName + '</b>');
+            var that = this;
+            this.loadTranslation(function () {
+                var lay = that.getViewport().getLayout();
+                lay.setActiveItem(1);
+                win.hide();
+                Ext.util.Cookies.set('username', values.userName);
+                Ext.util.Cookies.set('token', 'some token');
+                Ext.getCmp('loggedin').update('Logged in as: ' + ' <b>' + values.userName + '</b>');
+            });
         }
+
+    },
+    loadTranslation:function (callBack) {
+        var params = Ext.urlDecode(window.location.search.substring(1));
+        var url = '/extjs4/locale/ext-lang-'+Ux.locale.Manager.getLanguage()+'.js';
+
+        Ext.Loader.injectScriptElement(
+            url,
+            function () {
+                callBack();
+            }, function () {
+                Ext.error(url + " not found");
+            }, this, 'utf-8');
 
     },
     keyenter:function (item, event) {

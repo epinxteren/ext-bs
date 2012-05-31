@@ -1,7 +1,7 @@
 /**
  * Logo field
  */
-Ext.define('Ext.verz.form.field.Logo', {
+Ext.define('Ext.ib.form.field.Logo', {
     extend:'Ext.form.field.Base',
     mixins:{
         labelable:'Ext.form.Labelable',

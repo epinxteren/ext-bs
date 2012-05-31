@@ -7,5 +7,8 @@ Ext.define('Ext.ib.button.Next', {
     alias:'widget.nextbutton',
     text:'next',
     action:'next',
-    formBind:true
+    formBind:true,
+    locales : {
+        text : 'buttons.next'
+    }
 });

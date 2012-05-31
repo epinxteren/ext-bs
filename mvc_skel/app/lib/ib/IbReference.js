@@ -1,7 +1,6 @@
 
 Ext.define('Ext.ib.IbReference', {});//No error by require
 
-
 Ext.require(
     [
         /* proxy */
@@ -16,6 +15,7 @@ Ext.require(
         'Ext.ib.mixin.ModelIterator',
         'Ext.ib.mixin.FieldCreator',
         'Ext.ib.mixin.Filter',
+        'Ext.ib.mixin.ComponentAutoName',
         //'Ext.verz.data.Field',
         //'Ext.verz.window.FormWindow',
 
@@ -36,6 +36,7 @@ Ext.require(
 
         'Ext.ib.component.AutoSearch',
 
+        'Ext.ib.component.AutoFormWindow',
 
         /* store */
         'Ext.ib.Store',
@@ -53,6 +54,7 @@ Ext.require(
         'Ext.ib.button.GeneratePassword',
         'Ext.ib.button.Export',
         'Ext.ib.button.Send',
+        'Ext.ib.button.Update',
 
         /* form fields */
          'Ext.ib.component.AutoForm',//'Ext.verz.Form',

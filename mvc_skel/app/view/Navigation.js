@@ -4,6 +4,9 @@ Ext.define('App.view.Navigation', {
     floating:false,
     plain:true,
     title:'Menu',
+    locales : {
+        title : 'navigation.menu'
+    },
     rootVisible:false,
     autoScroll:true,
     collapsible:true,
@@ -52,12 +55,18 @@ Ext.define('App.view.Navigation', {
                 {
                     text:'Expand all',
                     iconCls:'expand',
+                    locales : {
+                        text : 'navigation.expand_all'
+                    },
                     handler:function () {
                         this.up('#treePanelMain').expandAll();
                     }
                 },
                 {
                     text:'Collapse all',
+                    locales : {
+                        text : 'navigation.collapse_all'
+                    },
                     iconCls:'collapse',
                     handler:function () {
                         this.up('#treePanelMain').collapseAll();

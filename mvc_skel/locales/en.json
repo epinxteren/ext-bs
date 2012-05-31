@@ -1,0 +1,107 @@
+{
+    "view":{
+        "dashboard":{
+            "index":{
+                "title":"Dashboard"
+            },
+            "portlets":{
+                "welcome":"Welcome",
+                "TrackPieChart":"TrackPieChart",
+                "Browser":"Browser"
+            }
+        },
+        "tracks":{
+            "albumTitle":"Album title",
+            "track":"track",
+            "addTrack":"Add track",
+            "index":{
+                "title":"Tracks grid"
+            }
+        },
+        "albums":{
+            "addAlbum":"Add album",
+            "album":"album",
+            "otherAlbums":"otherAlbums",
+            "index":{
+                "title":"Albums grid"
+            }
+        },
+        "artists":{
+            "index":{
+                "title":"Artist grid"
+            }
+        }
+    },
+    "model":{
+        "track":{
+            "name":"Name",
+            "duration":"Duration",
+            "duration_from":"Duration from",
+            "duration_until":"Duration until",
+            "unit_price":"Unit price",
+            "bytes":"Bytes"
+        },
+        "album":{
+            "artistName":"artistName",
+            "title":"Title",
+            "otherAlbums":"otherAlbums"
+        },
+        "artist":{
+            "name":"Name"
+        }
+    },
+    "buttons":{
+        "cancel":"Cancel",
+        "save":"Save",
+        "done":"Done",
+        "add":"Add",
+        "delete":"Delete",
+        "export":"Export",
+        "generatePassword":"Generate password",
+        "next":"Next",
+        "previos":"Previos",
+        "reset":"Reset",
+        "search":"Search",
+        "reset":"Reset"
+    },
+    "navigation":{
+        "collapse_all":"Collapse all",
+        "expand_all":"Expand all",
+        "menu":"Menu"
+    },
+    "components":{
+        "add":"Add",
+        "edit":"Edit",
+        "grid":"Grid",
+        "detail":"Detail",
+        "autosearch":{
+            "searching":"Zoeken"
+        }
+    },
+
+    "notify":{
+        "was_saved":"was saved",
+        "where_saved":"where saved",
+        "was_deleted":"was deleted",
+        "download_link":"download link",
+        "with_error":"with error",
+        "unknown":"unknown",
+        "was_succesfully_uploaded":"was succesfully uploaded",
+        "file_was_uploaded":"file was uploaded"
+    },
+
+    "fields":{
+        "name":"Name"
+    },
+
+    "login":{
+        "username":"Username",
+       "intro":"Welcome",
+       "Login":"Login",
+       "Log_in_as":"Log in as:",
+       "Logout":"Logout",
+       "Password":"Password",
+       "chooselanguage":"Choose language"
+    }
+
+}

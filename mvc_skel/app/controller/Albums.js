@@ -6,6 +6,6 @@ Ext.define('App.controller.Albums', {
 		'albums.Edit'
 	],
     stores:['Albums','Artists','Tracks'],
-    models:['Album','Artist','Track'],
+    models:['Album','Artist','Track']
 });
 

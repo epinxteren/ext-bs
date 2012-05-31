@@ -18,9 +18,13 @@ Ext.define("Ext.ib.Store", {
      */
     remoteSort:false,
 
+
     disablePagin:function(){
         this.pageSize= 99999999;
     }
+
+
+
 });
 
 

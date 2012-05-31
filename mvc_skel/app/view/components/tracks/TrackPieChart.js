@@ -13,7 +13,7 @@ Ext.define('App.view.components.tracks.TrackPieChart', {
         Filter:'Ext.ib.mixin.Filter'
     },
 
-    xtype: 'chart',
+
 
     animate: true,
 

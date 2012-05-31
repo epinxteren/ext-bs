@@ -21,11 +21,11 @@ Ext.define('Ext.ib.notify.Save', {
         var msg = '';
         if (Ext.isEmpty(me.html)) {
 
-            msg = this.getTitle() + '(' + this.getRecId() + ')<br>' + this.translate('was_saved');
+            msg = this.getTitle() + '(' + this.getRecId() + ')<br>' + this.translate('notify.was_saved');
             if (Ext.isDefined(me.response.resultSet)) {
                 var resultSet = me.response.resultSet;
                 if (resultSet.count > 1) {
-                    msg = resultSet.count + ' ' + this.translate('records') + '<br>' + this.translate('where_saved');
+                    msg = resultSet.count + ' ' + this.translate('records') + '<br>' + this.translate('notify.where_saved');
                 }
             }
 
@@ -36,7 +36,8 @@ Ext.define('Ext.ib.notify.Save', {
     },
 
     getTitle:function () {
-        var title = 'unknown';
+
+        var title = this.translate('notify.unknown');
         if (Ext.isDefined(this.response.resultSet) &&
             !Ext.isEmpty(this.response.resultSet.records[0].get(this.titleField))) {
             title = this.response.resultSet.records[0].get(this.titleField);
@@ -49,7 +50,7 @@ Ext.define('Ext.ib.notify.Save', {
     },
 
     getRecId:function () {
-        var id = 'unknown';
+        var id = this.translate('notify.unknown');
         if (Ext.isDefined(this.response.resultSet) &&
             !Ext.isEmpty(this.response.resultSet.records[0].get(this.idField))) {
             id = this.response.resultSet.records[0].get(this.idField);
