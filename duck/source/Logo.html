@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-verz-form-field-Logo'>/**
+</span> * Logo field
+ */
+Ext.define('Ext.verz.form.field.Logo', {
+    extend:'Ext.form.field.Base',
+    mixins:{
+        labelable:'Ext.form.Labelable',
+        field:'Ext.form.field.Field'
+    },
+    alias:'widget.logofield',
+<span id='Ext-verz-form-field-Logo-cfg-buttonText'>    /**
+</span>     * @cfg {String} [buttonText=upload] Text for the upload button
+     */
+    buttonText:'Upload',
+
+<span id='Ext-verz-form-field-Logo-cfg-makeEmpty'>    /**
+</span>     * @private
+     * @cfg {Boolean} [makeEmpty=false] decides of we are emptying the field
+     */
+    makeEmpty:false,
+
+    listeners : {
+        change:{
+            fn:function(object, newValue, oldValue,eOpts){this.afterChange(object, newValue, oldValue,eOpts)}
+        }
+    },
+
+<span id='Ext-verz-form-field-Logo-method-afterChange'>    /**
+</span>     * After Change set 2 timeouts that will update the layout one ofter halve a second and one
+     * after a second just in case the file loaded slow
+     * @param object
+     * @param event
+     */
+    afterChange: function(object, newValue, oldValue,eOpts) {
+        var t=setTimeout(function(){  object.up('panel').doLayout();},500);
+        var t2=setTimeout(function(){  object.up('panel').doLayout();},1000);
+    },
+
+    fieldSubTpl:[ // note: {id} here is really {inputId}, but {cmpId} is available
+        '&lt;img id=&quot;{id}_image_container&quot; src=&quot;{value}&quot; style=&quot;max-height:200;max-width:200&quot;&gt;&lt;br/&gt;',
+        '&lt;input id=&quot;{id}_delete&quot; type=&quot;checkbox&quot; ',
+        '&lt;tpl if=&quot;name&quot;&gt;name=&quot;{name}delete&quot; &lt;/tpl&gt;/&gt;&lt;label for=&quot;{id}_delete&quot;&gt;Verwijder huidige logo&lt;/label&gt;&lt;br/&gt;',
+        '&lt;input id=&quot;{id}&quot; type=&quot;hidden&quot; ',
+        '&lt;tpl if=&quot;name&quot;&gt;name=&quot;{name}&quot; &lt;/tpl&gt;',
+        '&lt;tpl if=&quot;size&quot;&gt;size=&quot;{size}&quot; &lt;/tpl&gt;',
+        '&lt;tpl if=&quot;tabIdx&quot;&gt;tabIndex=&quot;{tabIdx}&quot; &lt;/tpl&gt;',
+        'class=&quot;{fieldCls} {typeCls}&quot; autocomplete=&quot;off&quot; /&gt;&lt;br/&gt;',
+        {
+            compiled:true,
+            disableFormats:true
+        }
+    ],
+
+    setRawValue:function (value) {
+        var me = this;
+        value = Ext.value(value, '');
+        me.rawValue = value;
+        var imgEl = Ext.get(this.inputId + '_image_container');
+        // Some Field subclasses may not render an inputEl
+        if (me.inputEl) {
+            me.inputEl.dom.value = value;
+        }
+        if (imgEl) {
+            imgEl.dom.src = value;
+        }
+        return value;
+    },
+
+    // private
+    onRender:function () {
+        var me = this,
+            fieldStyle = me.fieldStyle;
+
+        me.onLabelableRender();
+
+<span id='Ext-verz-form-field-Logo-property-inputEl'>        /**
+</span>         * @property {Ext.Element} inputEl
+         * The input Element for this Field. Only available after the field has been rendered.
+         */
+        me.addChildEls({ name:'inputEl', id:me.getInputId() });
+
+        me.callParent(arguments);
+
+        // Make the stored rawValue get set as the input element's value
+        me.setRawValue(me.rawValue);
+
+        if (me.readOnly) {
+            me.setReadOnly(true);
+        }
+        if (me.disabled) {
+            me.disable();
+        }
+        if (fieldStyle) {
+            me.setFieldStyle(fieldStyle);
+        }
+
+
+        me.createButton();
+        me.renderActiveError();
+    },
+
+    onDeleted:function (e, object) {
+        this.makeEmpty = object.checked;
+    },
+
+<span id='Ext-verz-form-field-Logo-method-createButton'>    /**
+</span>     * @private
+     * Creates the custom trigger Button component. The fileInput will be inserted into this.
+     */
+    createButton:function () {
+        var me = this;
+        me.button = Ext.widget('button', Ext.apply({
+            ui:me.ui,
+            action:'logouploadbutton',
+            renderTo:me.bodyEl,
+            text:me.buttonText,
+            cls:Ext.baseCSSPrefix + 'form-file-btn',
+            preventDefault:false,
+            style:me.buttonOnly ? '' : 'margin-left:' + me.buttonMargin + 'px',
+            handler:this.buttonClickHandler
+        }, me.buttonConfig));
+    },
+
+    initEvents:function () {
+        var me = this;
+        var chkEl = Ext.get(this.inputId + '_delete');
+        me.mon(chkEl, 'change', me.onDeleted, me);
+        me.callParent();
+    },
+
+    buttonClickHandler:function (a, b) {
+
+    },
+
+    getRawValue:function () {
+        var me = this;
+        if (this.makeEmpty) {
+            return null;
+        }
+        return me.callParent();
+    }
+});</pre>
+</body>
+</html>

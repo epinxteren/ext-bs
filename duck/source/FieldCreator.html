@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+
+
+
+Ext.define('Ext.ib.mixin.FieldCreator', {
+
+
+<span id='global-method-getDefualtXtype'>    /**
+</span>     * Will create a form field from a model field
+     *
+     * @param (Ext.data.Field) field
+     *
+     */
+    getDefualtXtype:function(field){
+
+        switch(field.type){
+            case 'integer':
+                return &quot;FieldNumber&quot;;
+            case 'string':
+                return &quot;FieldText&quot;;
+            default:
+                return &quot;FieldText&quot;;
+        }
+    },
+
+
+
+<span id='global-method-createField'>    /**
+</span>     * Will create a form field from a model field
+     *
+     * @param (Ext.data.Field) field
+     * @param (Object)         form  The field object in the forum
+     *
+     */
+    createField:function(field,form){
+        if(!Ext.isDefined(form.xtype))
+            form.xtype = this.getDefualtXtype(field);
+
+        return form;
+    },
+
+<span id='global-method-requistDeleteRecord'>    /**
+</span>     * Will show a confirm screen if yes is clicked it will remove the record
+     *
+     * @param record
+     * @param store
+     */
+    requistDeleteRecord:function(record,store){
+        Ext.MessageBox.buttonText.yes = translate('yes');
+        Ext.MessageBox.buttonText.no = translate('no');
+        Ext.MessageBox.show({
+            title:translate('confirm_delete'),
+            msg:translate('do_you_want_to_remove_this_record'),
+            buttons:Ext.MessageBox.YESNO,
+<span id='global-method-fn'>            /**
+</span>             * Ask a confirmation for deleting the record
+             * @param buttonId
+             */
+            fn:function (buttonId) {
+                switch (buttonId) {
+                    case 'no':
+                        break;
+                    case 'yes':
+                        record.destroy(
+                        /* TODO: create working callback
+                        {callback :{
+                            success:function (rec, op) {
+                                Ext.create('widget.deletenotify', {response:op }).show();
+                            },
+                            failure:function (rec, op) {
+
+                                Ext.create('widget.errornotify', {response:op}).show();
+                            }
+                        }}
+                        */
+                        );
+                        store.load();
+                        break;
+                }
+            }
+        });
+    }
+
+
+});</pre>
+</body>
+</html>

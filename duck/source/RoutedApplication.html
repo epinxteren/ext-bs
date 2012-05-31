@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-ux-app-RoutedApplication'>/**
+</span>* @class Ext.ux.app.RoutedApplication
+* An application which uses Ext.Router
+*/
+Ext.define('Ext.ux.app.RoutedApplication', {
+	extend: 'Ext.app.Application',
+	requires: ['Ext.ux.app.RoutedController'],
+	
+	constructor: function(config) {
+		this._layouts = new Ext.util.MixedCollection();				
+		this.callParent(arguments);		
+	},
+	onBeforeLaunch: function() {
+		// Register this app with the Router
+		Ext.Router.registerApp(this);
+		Ext.Router.on('beforedispatch', this._onBeforeDispatch, this);
+		this.callParent(arguments);
+	},
+	_onBeforeDispatch: function(controller, request) {
+		// Save referenes to currently dispatched controller &amp; request
+		this.request = request;
+		this.controller = controller;
+	},
+	getLayout: function(name) {
+		return this._layouts.get(name);
+	},
+	addLayout: function(name, component) {
+		this._layouts.add(name, component);
+	},
+	render: function(layoutName, controller, component, config) {
+		var layout = this._layouts.get(layoutName),
+			request = this.request,
+			itemId = request.controller + '/' + request.action,
+			config = config || {};
+		
+		if (layout) {
+			var item = layout.getComponent(itemId);	
+			var xtypes = layout.getXTypes();		
+			if (!item) {
+				if (Ext.isFunction(component)) {
+					item = Ext.create(component, Ext.apply({
+						controller: controller,
+						itemId: itemId
+					}, config));
+				}
+				item = layout.add(item);				
+			}
+			// Ugly but works.
+			if (xtypes.match('window')) {
+				this.renderToWindow(layout, item)
+			} else if (xtypes.match('tabpanel')) {
+				this.renderToTabPanel(layout, item);
+			} else if (layout.layout.setActiveItem) {
+				this.renderToCard(layout, item);
+			}
+			return item;
+		} else {
+			throw new Error('Unknown layout target &quot;' + layoutName + '&quot; in #render.  available layout targets are: ' + this._layouts.keys.join(', '));
+		}		
+	},
+	renderToTabPanel: function(layout, item) {
+		layout.setActiveTab(item);
+	},
+	renderToWindow: function(layout, item) {
+		layout.show();
+		if (layout.layout.setActiveItem) {
+			layout.layout.setActiveItem(item);
+		}
+		layout.center();
+	},
+	renderToCard: function(layout, item) {
+		layout.layout.setActiveItem(item);
+	}
+});</pre>
+</body>
+</html>

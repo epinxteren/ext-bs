@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">var bytesTemplate = new Ext.XTemplate(
+    '&lt;div &gt;',
+    'Kb:',
+    '{kb}',
+    '&lt;br /&gt;',
+    'Mb:',
+    '{mb}',
+    '&lt;/div&gt;',
+    {
+        compiled:true
+    }
+);
+
+Ext.define('App.model.Track', {
+    extend:'Ext.data.Model',
+    idProperty:'TrackId',
+    fields:[
+        {
+            name:'id',
+            type:'integer'
+        },
+        {
+            name:'name',
+            type:'string',
+            ibOptions:{
+                grid:{
+                    inGridEditing:true
+                },
+                form:{
+
+                }
+            }
+        },
+        {
+            name:'milliseconds',
+            type:'integer',
+            ibOptions:{
+                grid:{
+                    inGridEditing:false
+                },
+                form:{
+
+                }
+            }
+        },
+        {
+            name:'bytes',
+            type:'integer',
+            ibOptions:{
+                form:{
+
+                }
+            }
+        },
+        {
+            name:'unit_price',
+            type:'double',
+            ibOptions:{
+                grid:{
+                    inGridEditing:true
+                },
+                form:{
+
+                }
+            }
+        },
+        {
+            name:'Bytes',
+            type:'string',
+
+            ibOptions:{
+                grid:{
+                    renderer:function (value, meta, record, rowIndex, colIndex, store, view) {
+                        var kb = (record.data.bytes / 1024);
+                        var mb = kb / 1024;
+                        kb =  Ext.util.Format.round(kb, 0);
+                        mb =  Ext.util.Format.round(mb, 3);
+                        return bytesTemplate.apply({kb:kb,mb:mb});
+                    }
+                }
+            }
+        }
+    ],
+
+    associations:[
+        /*
+         {
+         type:'belongsTo',
+
+         //Set correct name
+         getterName:&quot;getAlbum&quot;,
+         setterName:&quot;setAlbum&quot;,
+         name:'Album',
+
+         //Connect
+         model:'App.model.Album',
+         associationKey:'album',//The group for nested json
+         primaryKey:'album.id',
+         foreignKey:'id',
+
+         //Options
+         autoLoad:false
+         }
+
+         {
+         type: 'belongsTo',
+         model: 'MediaType',
+         primaryKey: 'MediaTypeId',
+         foreignKey: 'MediaTypeId',
+         autoLoad: false,
+         associationKey: 'MediaType'
+         },
+         {
+         type: 'belongsTo',
+         model: 'Genre',
+         primaryKey: 'GenreId',
+         foreignKey: 'GenreId',
+         autoLoad: false,
+         associationKey: 'Genre'
+         }*/
+    ],
+    proxy:{
+        type:'IbRest',
+        url:Ib.config.restUrl + 'track/'
+    }
+});
+</pre>
+</body>
+</html>

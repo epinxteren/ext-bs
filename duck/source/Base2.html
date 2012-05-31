@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-ib-notify-Base'>/**
+</span> * notification screen
+ *
+ */
+Ext.define('Ext.ib.notify.Base', {
+    requires:[
+        'Ext.ux.window.Notification'
+    ],
+    extend:'Ext.ux.window.Notification',
+    title:'information',
+    position:'br',
+    manager:'fullscreen',
+    alias:'widget.basenotify',
+    cls:'ux-notification-light',
+    width:250,
+    height:115,
+<span id='Ext-ib-notify-Base-cfg-setIconClass'>    /**
+</span>     * @cfg {Boolean} [setIconClass:true] Should an automatic icon class be added
+     */
+    setIconClass:true,
+
+<span id='Ext-ib-notify-Base-cfg-autoHide'>    /**
+</span>     * @cfg {Boolean} [autoHide:true] Should the noteify hide itself
+     */
+    autoHide:true,
+<span id='Ext-ib-notify-Base-cfg-autoHideDelay'>    /**
+</span>     * @cfg {Number} [autoHideDelay=3000] delay in miliseconds
+     */
+    autoHideDelay:3000,
+<span id='Ext-ib-notify-Base-cfg-response'>    /**
+</span>     * @cfg {Object} [response=null] te be used when message need to show anything depedning on a request result
+     */
+    response:null,
+
+<span id='Ext-ib-notify-Base-method-translate'>    /**
+</span>     * Translates text if the translate function is available
+     *
+     * @param {String} text
+     * @return (String} translated text or orginal text
+     */
+    translate:function (text) {
+        if (typeof(translate) == 'function') {
+            return translate(text);
+        }
+        return text;
+    },
+
+    initComponent:function () {
+        var me = this;
+
+        if (me.setIconClass) {
+            me.iconCls = me.iconCls + ' ux-notification-icon-' + me.title;
+        }
+
+        me.title = this.translate(me.title);
+
+        this.callParent(arguments);
+    }
+});
+
+</pre>
+</body>
+</html>

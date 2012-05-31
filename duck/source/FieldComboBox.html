@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-ib-component-field-FieldComboBox'>/**
+</span> * Verz combobox to implement some standard settings and add custom functionality for seaching
+ *
+ */
+Ext.define('Ext.ib.component.field.FieldComboBox', {
+    extend:'Ext.form.field.ComboBox',
+    alias:'widget.FieldComboBox',
+
+<span id='Ext-ib-component-field-FieldComboBox-cfg-the'>    /**
+</span>     * @cfg the field we want to use in the query if not set name will be used
+     */
+    queryFilterField:undefined,
+    queryParam:'filter',
+    typeAhead:true,
+    forceSelection:true,
+    pageSize:25,
+    queryMode:'remote',
+    minChars:2,
+    valueNotFoundText:translate(&quot;not_found&quot;),
+
+<span id='Ext-ib-component-field-FieldComboBox-method-getParams'>    /**
+</span>     * Will create the search query for this combobox.
+     * this is an overwrite of combobox so the query can behave the same as normal filters
+     *
+     * @param queryString
+     * @return {Object}
+     */
+    getParams:function (queryString) {
+        var params = {},
+            param = this.queryParam;
+
+        if (param) {
+            params[param] = {};
+            params[param][param] = {};
+            params[param][param][this.queryFilterField] = queryString;
+        }
+        return params;
+    },
+
+    initComponent:function () {
+        var me = this;
+
+        if(Ext.isEmpty(me.queryFilterField)) {
+            me.queryFilterField = me.name;
+        }
+        me.callParent(arguments);
+    }
+});</pre>
+</body>
+</html>

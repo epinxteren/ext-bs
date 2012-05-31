@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-verz-form-field-CheckBox'>/**
+</span> * textbox that will use uncheckedValue and inputValue for saving instead true/false
+ *
+ */
+Ext.define('Ext.verz.form.field.CheckBox', {
+        extend:'Ext.form.field.Checkbox',
+        alias:'widget.verzcheckbox',
+        inputValue:1,
+        uncheckedValue:0,
+<span id='Ext-verz-form-field-CheckBox-method-getRawValue'>        /**
+</span>         * Returns the checked state of the checkbox.
+         * @return {Boolean} True if checked, else false
+         */
+        getRawValue:function () {
+            return this.checked;
+        },
+
+<span id='Ext-verz-form-field-CheckBox-method-getValue'>        /**
+</span>         * Returns the checked state of the checkbox.
+         * @return {Boolean} True if checked, else false
+         */
+        getValue:function () {
+            return this.getSubmitValue();
+        },
+
+<span id='Ext-verz-form-field-CheckBox-method-getSubmitValue'>        /**
+</span>         * Returns the submit value for the checkbox which can be used when submitting forms.
+         * @return {Boolean/Object} True if checked; otherwise either the {@link #uncheckedValue} or null.
+         */
+        getSubmitValue:function () {
+            var unchecked = this.uncheckedValue,
+                uncheckedVal = Ext.isDefined(unchecked) ? unchecked : null;
+            return this.checked ? this.inputValue : uncheckedVal;
+        }
+    }
+);
+</pre>
+</body>
+</html>

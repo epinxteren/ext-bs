@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-util-Route'>/**
+</span> * @author Ed Spencer
+ * @class Ext.util.Route
+ * Represents a mapping between a url and a controller/action pair. May also contain additional params
+ */
+Ext.define('Ext.ux.router.Route', {
+    
+<span id='Ext-util-Route-cfg-url'>    /**
+</span>     * @cfg {String} url The url string to match. Required.
+     */
+    
+    constructor: function(config) {
+        Ext.apply(this, config, {
+            conditions: {}
+        });
+        
+        /*
+         * The regular expression we use to match a segment of a route mapping
+         * this will recognise segments starting with a colon,
+         * e.g. on 'namespace/:controller/:action', :controller and :action will be recognised
+         */
+        this.paramMatchingRegex = new RegExp(/:([0-9A-Za-z\_]*)/g);
+        
+        /*
+         * Converts a route string into an array of symbols starting with a colon. e.g.
+         * &quot;:controller/:action/:id&quot; =&gt; [':controller', ':action', ':id']
+         */
+        this.paramsInMatchString = this.url.match(this.paramMatchingRegex) || [];
+        
+        this.matcherRegex = this.createMatcherRegex(this.url);
+    },
+    
+<span id='Ext-util-Route-method-recognize'>    /**
+</span>     * Attempts to recognize a given url string and return controller/action pair for it
+     * @param {String} url The url to recognize
+     * @return {Object} The matched data, or false if no match
+     */
+    recognize: function(url) {
+        if (this.recognizes(url)) {
+            var matches = this.matchesFor(url);
+            
+            return Ext.applyIf(matches, {
+                controller: this.controller,
+                action    : this.action,
+                historyUrl: url
+            });
+        }
+    },
+    
+<span id='Ext-util-Route-method-recognizes'>    /**
+</span>     * Returns true if this Route matches the given url string
+     * @param {String} url The url to test
+     * @return {Boolean} True if this Route recognizes the url
+     */
+    recognizes: function(url) {
+        return this.matcherRegex.test(url);
+    },
+    
+<span id='Ext-util-Route-method-matchesFor'>    /**
+</span>     * @private
+     * Returns a hash of matching url segments for the given url.
+     * @param {String} url The url to extract matches for
+     * @return {Object} matching url segments
+     */
+    matchesFor: function(url) {
+        var params = {},
+            keys   = this.paramsInMatchString,
+            values = url.match(this.matcherRegex),
+            length = keys.length,
+            i;
+        
+        //first value is the entire match so reject
+        values.shift();
+
+        for (i = 0; i &lt; length; i++) {
+            params[keys[i].replace(&quot;:&quot;, &quot;&quot;)] = values[i];
+        }
+
+        return params;
+    },
+    
+<span id='Ext-util-Route-method-urlFor'>    /**
+</span>     * Constructs a url for the given config object by replacing wildcard placeholders in the Route's url
+     * @param {Object} config The config object
+     * @return {String} The constructed url
+     */
+    urlFor: function(config) {
+        var url = this.url,
+            name;
+        
+        for (name in config) {
+            if (config.hasOwnProperty(name)) {
+                url = url.replace(':' + name, config[name]);
+            }
+        }
+        
+        return url;
+    },
+    
+<span id='Ext-util-Route-method-createMatcherRegex'>    /**
+</span>     * @private
+     * Takes the configured url string including wildcards and returns a regex that can be used to match
+     * against a url
+     * @param {String} url The url string
+     * @return {RegExp} The matcher regex
+     */
+    createMatcherRegex: function(url) {
+<span id='Ext-util-Route-property-paramsInMatchString'>        /**
+</span>         * Converts a route string into an array of symbols starting with a colon. e.g.
+         * &quot;:controller/:action/:id&quot; =&gt; [':controller', ':action', ':id']
+         */
+        var paramsInMatchString = this.paramsInMatchString,
+            length = paramsInMatchString.length,
+            i, cond, matcher;
+        
+        for (i = 0; i &lt; length; i++) {
+            cond    = this.conditions[paramsInMatchString[i]];
+            matcher = Ext.String.format(&quot;({0})&quot;, cond || &quot;[%a-zA-Z0-9\\_\\s,]+&quot;);
+
+            url = url.replace(new RegExp(paramsInMatchString[i]), matcher);
+        }
+
+        //we want to match the whole string, so include the anchors
+        return new RegExp(&quot;^&quot; + url + &quot;$&quot;);
+    }
+});</pre>
+</body>
+</html>

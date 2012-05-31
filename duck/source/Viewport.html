@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define('App.view.Viewport', {
+    extend:'Ext.container.Viewport',
+    requires:[
+        'App.view.Header',
+        'App.view.Footer',
+        'App.view.Navigation'
+    ],
+    //xtype:'panel',
+    layout:'card',
+    id:'viewport',
+    activeItem:0,
+    items:[
+        {
+            id:'card-0'
+        },
+        {
+            id:'card-1',
+            xtype:'panel',
+            layout:'border',
+
+            items:[
+                {
+                    xtype:'view.Header',
+                    region:'north',
+                    height:50
+                },
+                {
+                    xtype:'view.Navigation',
+                    region:'west',
+                    width:200
+                },
+                {
+                    //xtype: 'tabpanel',	// &lt;-- this is the render-target &quot;workspace&quot;, since it's the center region
+                    xtype:'container', // &lt;-- instead of &quot;tabpanel&quot;, can also do card-layout
+                    layout:'card',
+                    region:'center',
+                    stateful:true,
+                    stateId:'center-card'
+                }
+            ]
+        }
+
+
+    ]
+
+
+});</pre>
+</body>
+</html>

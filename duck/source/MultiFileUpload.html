@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-verz-form-field-MultiFileUpload'>/**
+</span> * Component to make multi file upload possible
+ */
+Ext.define('Ext.verz.form.field.MultiFileUpload', {
+    extend:'Ext.panel.Panel',
+    alias:'widget.multifileupload',
+
+    succesfullFiles : [],
+    failedFiles : [],
+<span id='Ext-verz-form-field-MultiFileUpload-cfg-store'>    /**
+</span>     * @cfg {String} [store=File] Store to be used with this component to temporary save files to memory
+     */
+    store:'File',
+<span id='Ext-verz-form-field-MultiFileUpload-cfg-maxFiles'>    /**
+</span>     * @cfg {Number} [maxFiles=null] when set it will limit the number of files
+     */
+    maxFiles:null,
+    label:'',
+<span id='Ext-verz-form-field-MultiFileUpload-cfg-name'>    /**
+</span>     * @cfg {String} [name=multifile] name for this component
+     */
+    name:'multifile',
+<span id='Ext-verz-form-field-MultiFileUpload-cfg-deleteIcon'>    /**
+</span>     * @cfg {String} [deleteIcon=/images/icons/small/delete.png] path to the icon that should be shown in the dele column
+     */
+    deleteIcon:'/images/icons/small/delete.png',
+<span id='Ext-verz-form-field-MultiFileUpload-property-currentField'>    /**
+</span>     * @private holds the current file
+     */
+    currentField:null,
+    margin:10,
+
+//    listeners:{
+//        processed:{
+//            fn:function (object) {
+//                object.onProcessed(object)
+//            },
+//            scope:this
+//        }
+//    },
+
+<span id='Ext-verz-form-field-MultiFileUpload-method-getStore'>    /**
+</span>     * return the store
+     */
+    getStore:function () {
+        var mystore = Ext.getStore(this.store);
+        if (!mystore) {
+            mystore = Ext.create('Vzs.store.' + this.store);
+        }
+        return mystore;
+    },
+
+    onProcessed : function(object) {
+        object.getStore().removeAll();
+        var treePan = object.up('panel').down('treepanel');
+        treePan.getRootNode().removeAll();
+        if (Ext.isDefined(this.maxFiles)) {
+            treePan.columns[0].setText(translate('files') + ' ' +object.getStore().getCount() + ' ' + translate('of') + ' ' + this.maxFiles)
+        }
+    },
+<span id='Ext-verz-form-field-MultiFileUpload-method-addFileField'>    /**
+</span>     * Adds a new filefield to a container so a file can be uploaded
+     * @param {Boolean} disabled if this is set the field will be added disabled
+     */
+    addFileField:function (disabled) {
+        var fieldName = this.asArray ? this.name + '[]' : this.name;
+        this.currentField = this.down('panel').next('panel').add(
+            {
+                xtype:'filefield',
+                name:fieldName,
+                fieldLabel:this.label,
+                disabled:disabled,
+                listeners:{
+                    change:{
+                        fn:function (inp, d) {
+                            var id = 'multifileitem' + parseInt(Math.random() * 1e10, 10);
+                            var mystore = this.getStore();
+                            // create new record and add it to store
+                            var rec = new mystore.model({
+                                input:inp, fileName:d, id:id
+                            }, id);
+
+                            rec.commit();
+                            mystore.add(rec);
+
+                            var treePan = this.up('panel').down('treepanel');
+                            treePan.getRootNode().appendChild(
+                                {
+                                    id:id,
+                                    text:d,
+                                    input:inp,
+                                    leaf:true
+                                }
+                            );
+
+                            inp.hide();
+
+                            if (Ext.isDefined(this.maxFiles)) {
+                                treePan.columns[0].setText(translate('files') + ' ' + mystore.getCount() + ' ' + translate('of') + ' ' + this.maxFiles)
+                            }
+                            if (this.maxFiles != null &amp;&amp; mystore.data.length &gt;= this.maxFiles) {
+                                this.addFileField(true);
+                            } else {
+                                this.addFileField(false);
+                            }
+                        },
+                        scope:this
+                    }
+                }
+            }
+        );
+    },
+
+    initComponent:function () {
+        var me = this;
+
+        var gridTitle = '';
+        if (Ext.isDefined(me.maxFiles)) {
+            gridTitle = translate('files') + ' 0 ' + translate('of') + ' ' + me.maxFiles
+        } else {
+            gridTitle = translate('files')
+        }
+        Ext.applyIf(me, {
+            items:[
+                {
+                    xtype:'panel',
+                    items:[
+                        {
+                            xtype:'treepanel',
+                            width:this.width,
+                            collapseDirection:'left',
+
+                            lines:false,
+                            rootVisible:false,
+                            columns:[
+                                {
+                                    xtype:'treecolumn',
+                                    sortable:false,
+                                    dataIndex:'text',
+                                    text:gridTitle,
+                                    flex:1,
+                                    hideable:false
+                                },
+                                {
+                                    xtype:'actioncolumn',
+                                    sortable:false,
+                                    items:[
+                                        {
+                                            icon:me.deleteIcon,
+                                            tooltip:translate('delete'),
+                                            handler:function (grid, rowIndex) {
+                                                var mystore = grid.getStore();
+                                                var rec = grid.getStore().getAt(rowIndex);
+                                                var panel = this.up('multifileupload');
+                                                var panelStore = panel.getStore();
+                                                panelStore.remove(panelStore.getById(rec.get('id')));
+                                                mystore.remove(rec);
+
+                                                rec.get('input').destroy();
+                                                rec.destroy();
+
+                                                if (Ext.isDefined(panel.maxFiles)) {
+                                                    panel.down('treepanel').columns[0].setText(translate('files') + ' ' + panelStore.getCount() + ' ' + translate('of') + ' ' + panel.maxFiles)
+                                                }
+                                                if (this.up('multifileupload').currentField.isDisabled()) {
+                                                    this.up('multifileupload').currentField.enable();
+                                                }
+                                                panel.down('treepanel').doLayout();
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    xtype:'panel',
+                    name:'fieldcontainer',
+                    cls:'fieldcontainer',
+                    ref:'test',
+                    bodyPadding:5,
+                    items:[]
+
+                }
+            ]
+        });
+        me.getStore();
+        me.callParent(arguments);
+
+        this.addEvents(
+<span id='Ext-verz-form-field-MultiFileUpload-event-processed'>                /**
+</span>                 * @event processed
+                 * Fires when all files are processed (after processNextFile cant find a next record
+                 */
+                'processed'
+        ),
+
+        me.addFileField();
+    },
+
+    processNextFile:function (index, url) {
+        var record = this.getStore().getAt(index);
+        if(Ext.isEmpty(record)) {
+            //rec is empty so stop processing
+            this.fireEvent('processed', this);
+            return
+        }
+
+        var field = record.get('input');
+        var form = Ext.create('Ext.verz.Form', {'id':'tempuploadform' + parseInt(Math.random() * 1e10, 10)});
+        form.removeAll();
+        form.add(field);
+
+        form.submit({
+            url:url,
+            waitMsg:translate('uploading_your_icon'),
+            waitTitle:translate('please_wait'),
+            success:function (rec, op) {
+                this.succesfullFiles.push(op.result['ref']);
+                this.processNextFile(index + 1, url);
+                form.destroy();
+            },
+            failure:function (rec, op) {
+                this.failedFiles.push(op.result['ref']);
+                form.destroy();
+            },
+            scope:this
+        });
+    },
+
+    processFiles:function (url) {
+        var store = this.getStore();
+
+        if (!Ext.isEmpty(store)) {
+            this.processNextFile(0, url);
+        }
+    }
+});
+
+///**
+// * Model to hold the file data
+// *
+// */
+//Ext.define('Vzs.model.File', {
+//    extend:'Ext.verz.Model',
+//    autoLoad:true,
+//    fields:[
+//        {
+//            name:'id',
+//            type:'text'
+//        },
+//        {
+//            name:'fileName',
+//            type:'text'
+//        },
+//        {
+//            name:'input'
+//        }
+//    ],
+//    /**
+//     * @cfg {Boolean} asArray save the files as an array (will add [] after the field name)
+//     */
+//    asArray:true,
+//
+//    proxy:{
+//        type:'localstorage',
+//        id:'fileproxy' + parseInt(Math.random() * 1e10, 10)
+//    }
+//
+//});
+//
+//
+//Ext.define(&quot;Vzs.store.File&quot;, {
+//    autoSync:true,
+//    extend:'Ext.verz.Store',
+//    model:'Vzs.model.File',
+//    autoLoad:true,
+//    pageSize:25,
+//    storeId:'File'
+//});</pre>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-ib-notify-Upload'>/**
+</span> * save notification screen
+ *
+ */
+Ext.define('Ext.ib.notify.Upload', {
+    extend:'Ext.ib.notify.Base',
+    alias:'widget.uploadnotify',
+    title:'upload',
+    fileField:'ref',
+
+    initComponent:function () {
+        var me = this;
+
+        if (typeof(me.response.result) != 'undefined') {
+            me.html = me.response.result[this.fileField] + this.translate('was_succesfully_uploaded');
+        } else {
+            me.html = this.translate('file_was_uploaded');
+        }
+
+        this.callParent(arguments);
+    }
+});</pre>
+</body>
+</html>

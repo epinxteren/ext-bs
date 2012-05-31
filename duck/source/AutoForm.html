@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+<span id='Ext-ib-component-AutoForm'>/**
+</span> * A AutoForm class, that can create a form from a model.
+ *
+ */
+Ext.define('Ext.ib.component.AutoForm', {
+    extend:'Ext.form.Panel',
+    alias:'widget.AutoForm',
+
+    mixins:{
+        ModelIterator:'Ext.ib.mixin.ModelIterator',
+        FieldCreator:'Ext.ib.mixin.FieldCreator'
+    },
+
+    layout:'anchor',
+
+<span id='Ext-ib-component-AutoForm-cfg-If'>    /**
+</span>     * @cfg {Boolean} If this forum is a form that add's records to it's store
+     */
+    addForm:false,
+
+<span id='Ext-ib-component-AutoForm-cfg-If'>    /**
+</span>     * @cfg {Boolean} If this form edit's a excisting model, decleard with {loadItemId}
+     */
+    editForm:false,
+
+<span id='Ext-ib-component-AutoForm-cfg-Automatic'>    /**
+</span>     * @cfg {Number=undefined} Automatic load this record when {editForm} is enabled and the record will be loaded into the form.
+     */
+    loadItemId:undefined,
+
+<span id='Ext-ib-component-AutoForm-cfg-idField'>    /**
+</span>     * @cfg {String} [idField=id] the field the id for the record can be found in
+     */
+    idField:'id',
+
+<span id='Ext-ib-component-AutoForm-property-titleField'>    /**
+</span>     * @cgf {String} [titleField=title] The field the title can be found in
+     */
+    titleField:'title',
+
+<span id='Ext-ib-component-AutoForm-property-hasDeleteItem'>    /**
+</span>     * @cgf {boolean} [hasDeleteItem=false] Add's a button to delete the record
+     */
+    hasDeleteItem:false,
+
+    initComponent:function () {
+
+        var me = this;
+
+        var fields = [];
+
+        var store = Ext.getStore(me.store);
+
+        me.modelForEach(function (field, index) {
+            var form = field.ibOptions.form;
+
+            me.createField(field, form);
+
+            if (me.layout === 'anchor') {
+                if (!Ext.isDefined(form.anchor))
+                    form.anchor = '100%';
+            }
+            else if (!Ext.isDefined(form.flex))
+                form.flex = 1;
+
+            if (!Ext.isDefined(form.fieldLabel))
+                form.fieldLabel = field.name;
+
+            if (!Ext.isDefined(form.name))
+                form.name = field.name;
+
+            fields.push(form);
+
+        }, {//pass filter, only show colloms
+            ibOptions:{
+                form:{
+                }
+            }
+        });
+
+        var objModel = Ext.ModelManager.create({ }, store.model);
+        fields.push(
+            {
+                xtype:'hiddenfield',
+                name:objModel.idProperty,
+                fieldLabel:objModel.idProperty
+            });
+
+
+        this.items = fields;
+
+        me.initBarOptions();
+
+        me.initLisseners();
+
+
+        me.callParent(arguments);
+    },
+
+    initLisseners:function () {
+        var me = this;
+
+        if (!Ext.isDefined(me.listeners))
+        {
+            me.listeners = {};
+        }
+
+        if (me.editForm) {
+            me.listeners.afterrender = {
+                fn:function () {
+                    var store = Ext.getStore(me.store);
+                    var item = store.getById(me.loadItemId);
+                    if (Ext.isDefined(item) &amp;&amp; item != null) {
+                        me.loadRecord(item);
+                    }else
+                    {
+
+
+                    }
+                },
+                scope:me
+            };
+        }
+    },
+
+
+    initBarOptions:function () {
+        var me = this;
+
+        var topBar = [];
+
+
+        var removeButton = {
+            text:'Delete',
+            handler:function () {
+                var objForm = this.up('form').getForm();
+                var record = objForm.getRecord();
+                if (Ext.isDefined(record)) {
+
+                    objForm.reset();
+                    this.up('form').setDisabled(true);
+
+                    var store = Ext.getStore(me.store);
+                    store.remove(record);
+                    store.sync();
+                }
+            }
+        };
+
+        if (me.hasDeleteItem)
+            topBar = topBar.concat(topBar.length == 0 ? [removeButton] : ['-', removeButton]);
+
+        /* bottom bar */
+        ////////////////////////////////////////
+        //Buttons
+        ////////////////////////////////////////
+        var bottomBar = [];
+
+        var saveButton = {
+            text:'Save',
+            handler:function () {
+                var objForm = this.up('form').getForm();
+                var store = Ext.getStore(me.store);
+                var record = objForm.getRecord();
+
+                if (objForm.isValid()) {
+
+                    if (me.addForm) {
+                        var objModel = Ext.ModelManager.create({ }, store.model);
+                        objForm.updateRecord(objModel);
+                        store.add(objModel);
+                        objModel.save({
+                            success:function (rec, op) {
+                                Ext.create('widget.savenotify', {response:op, titleField:me.titleField, idField:me.idField }).show();
+                            },
+                            failure:function (rec, op) {
+                                Ext.create('widget.errornotify', {response:op}).show();
+                            }
+                        });
+                    }
+                    if (me.editForm) {
+                        var objModel = Ext.ModelManager.create({ }, store.model);
+                        objForm.updateRecord(objModel);
+                        record = store.getById(objModel.get(me.idField));
+                        objForm.updateRecord(record);
+                        record.save({
+                            success:function (rec, op) {
+                                Ext.create('widget.savenotify', {response:op, titleField:me.titleField, idField:me.idField }).show();
+                            },
+                            failure:function (rec, op) {
+                                Ext.create('widget.errornotify', {response:op}).show();
+                            }
+                        });
+                    }
+                }
+            }
+        };
+
+        bottomBar = bottomBar.concat(bottomBar.length == 0 ? [saveButton] : ['-', saveButton]);
+
+        if (topBar.length != 0)
+            me.tbar = topBar;
+
+        me.bbar = bottomBar;
+    }
+
+});</pre>
+</body>
+</html>

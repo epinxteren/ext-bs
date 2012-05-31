@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-ib-controller-Base'>/**
+</span> * Base controller all controllers for vzs will extend this controller it will implement and handle some functions that
+ * all controllers will need
+ *
+ */
+Ext.define('Ext.ib.controller.Base', {
+
+    extend:'Ext.ux.app.RoutedController',
+
+
+    index: function(request) {
+        this.render(&quot;workspace&quot;, this[&quot;get&quot; + this.id + &quot;IndexView&quot;]());
+    },
+
+    add: function(request) {
+        this.render(&quot;workspace&quot;, this[&quot;get&quot; + this.id + &quot;CreateView&quot;]());
+    },
+
+    edit: function(request) {
+        this.render(&quot;workspace&quot;, this[&quot;get&quot; + this.id + &quot;EditView&quot;](),{itemId:+request.id});
+    },
+
+<span id='Ext-ib-controller-Base-method-clearFilters'>    /**
+</span>     * Will clear filters on stores
+     *
+     * @param {Boolean} reload if this is set to true the stores clearFilters will be called and a call to the server will be done else it will just remove filters without any call to the server
+     * @param {String} {storeName=null} Optional if filters need to be cleared for just one store
+     */
+    clearFilters:function (reload, storeName) {
+        Ext.each(this.stores,
+            function (store) {
+                if (Ext.isDefined(store) &amp;&amp; store != '' &amp;&amp; (storeName == null || storeName == store)) {
+                    Ext.log('trying to get store' + store);
+                    var myStore = this.getStore(store);
+
+                    if (!Ext.isDefined(myStore)) {
+                        Ext.Error.raise({
+                            msg:'Could not remove filters as store ' + store + ' does not exist',
+                            option:[reload, storeName], // whatever was passed into the method
+                            code:Ext.verzError.WARNING
+                        });
+                    }
+                    if (reload == true &amp;&amp; this.baseFilters == null) {
+                        myStore.clearFilter();
+                    } else {
+                        myStore.filters.clear();
+                        if (this.baseFilters != null) {
+                            myStore.filter(this.baseFilters);
+                        }
+                    }
+                }
+            }, this);
+    }
+
+
+
+});</pre>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&quot;Ext.ib.Store&quot;, {
+    extend:'Ext.data.Store',
+    alias:'widget.IbStore',
+<span id='global-cfg-Vzs.config.pageLimit'>    /**
+</span>     * @cfg {Number} [Vzs.config.pageLimit] standard pagesize is the config pageLimit
+     */
+    pageSize:Ib.config.pageLimit,
+<span id='global-cfg-autoLoad'>    /**
+</span>     * @cfg {Boolean} [autoLoad=false] standard dont use auto load
+     */
+    autoLoad:false,
+<span id='global-cfg-remoteFilter'>    /**
+</span>     * @cfg {Boolean} [remoteFilter=true] when filtering do this on the server
+     */
+    remoteFilter:true,
+<span id='global-cfg-remoteSort'>    /**
+</span>     * @cfg {Boolean} [remoteSort=true] when sorting do this on the server
+     */
+    remoteSort:false
+});
+
+
+</pre>
+</body>
+</html>

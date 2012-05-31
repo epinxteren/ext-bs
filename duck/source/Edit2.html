@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define('App.view.artists.Edit', {
+    alias: 'widget.artists.Edit',
+    title: 'Edit artist',
+    extend:'Ext.panel.Panel',
+    flex:1,
+    layout:{
+        type:'hbox',
+        align:'stretch'
+    },
+    initComponent:function () {
+        var me = this;
+        me.items = [
+            {
+                loadItemId:me.itemId,
+                flex:1,
+                editForm:true,
+                xtype:'AutoForm',
+                store:'Artists',
+                titleField:'name'
+            }
+        ];
+        me.callParent(arguments);
+    }
+});</pre>
+</body>
+</html>

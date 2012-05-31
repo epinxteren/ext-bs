@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define('App.view.dashboard.Index', {
+    extend:'Ext.panel.Panel',
+    alias:'widget.dashboard.Index',
+    title:'Dashboard',
+    requires:['App.view.components.tracks.TrackPieChart'],
+    dockedItems:[
+        {
+            xtype:'toolbar',
+            dock:'top',
+            items:[
+                {
+                    text:'Add browser',
+                    handler:function () {
+                        Ext.Msg.prompt(&quot;Enter a URL&quot;, &quot;http://www.ibuildings.nl&quot;, function(btn, text) {
+
+                            if(btn ==='ok'){
+                            var panel = this.up(&quot;panel&quot;);
+                            var portletHtml = Ext.String.format('&lt;iframe src=&quot;{0}&quot; style=&quot;width:100%; height: 100%;&quot; frameborder=&quot;no&quot;&gt;&lt;/iframe&gt;', text);
+                            panel.add({
+                                xtype : 'Portlet',
+                                title : text,
+                                html : portletHtml,
+                                width : 200,
+                                height : 200
+                            }).show();
+                            }
+                        }, this, false, &quot;http://www.ibuildings.nl&quot;);
+
+                    }
+                },
+                {
+                    text:'Add album chart',
+                    handler:function () {
+
+                        var that = this;
+                        Ext.create(&quot;Ext.window.Window&quot;, {
+                            title: 'Select album',
+                            modal: true,
+                            closable: true,
+                            width: 350,
+                            height: 90,
+                            layout: 'hbox',
+                            items:[{
+                                xtype:'FieldComboBox',
+                                flex:1,
+
+                                fieldLabel:'name',
+                                name:'id',
+
+                                store:'Albums',
+                                displayField:'title',
+                                valueField:'id'
+                            }],
+                            buttons:[{
+                                text:'ok',
+                                handler:function () {
+                                    var window = this.up('window');
+                                    var box = window.down('FieldComboBox');
+                                    var valueId = box.getValue();
+                                    if(!isNaN(valueId))
+                                    {
+                                        var panel = that.up(&quot;panel&quot;);
+                                        panel.add({
+                                            xtype : 'Portlet',
+                                            title : 'Chart of '+box.getRawValue(),
+                                            html : '',
+                                            items:[
+                                                {
+                                                    itemId:valueId,
+                                                    flex:1,
+                                                    xtype:'components.TrackPieChart'
+                                                }
+                                            ],
+                                            width : 200,
+                                            height : 200
+                                        }).show();
+                                    }
+                                    window.close();
+                                }
+                            },{
+                                text:'cancel',
+                                handler:function () {
+                                    var window = this.up('window');
+                                    window.close();
+                                }
+                            }]
+                        }).show();
+                    }
+                }
+            ]
+        }
+    ]
+});</pre>
+</body>
+</html>

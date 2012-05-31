@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+
+
+Ext.define('App.controller.Login', {
+    extend: 'Ext.ib.controller.Base',
+    init:function () {
+        this.control({
+            'viewport':{
+                render:this.index
+            },
+            'button[action=login]':{
+                click:this.login
+            },
+            '#loginwindow textfield':{
+                specialkey:this.keyenter
+            },
+            'button[action=logout]':{
+                click:this.logout
+            }
+        });
+    },
+    views:[
+        'Login', 'Viewport'
+    ],
+    refs:[
+        {
+            ref:'viewport',
+            selector:'viewport'
+        },
+        {
+            ref:'loginwindow',
+            selector:'loginwindow'
+        }
+    ],
+
+    index:function () {
+        console.log('Index function');
+        var loginWin = Ext.create('App.view.Login');
+        loginWin.show();
+
+        this.login();
+    },
+
+    login:function () {
+
+
+        console.log('Login button');
+        var win = Ext.getCmp('loginwindow');
+        var form = Ext.getCmp('loginform');
+        var values = form.getValues();
+
+        var lay = this.getViewport().getLayout();
+
+        //@todo this hould ofcourse be better implemented with at least a check with the webservices if somebody is realy logged in
+        //but for now just check the cookies
+        if(Ext.util.Cookies.get('username') != '' &amp;&amp; Ext.util.Cookies.get('username') != null &amp;&amp; Ext.util.Cookies.get('token') != '' &amp;&amp; Ext.util.Cookies.get('token') != null)
+        {
+            lay.setActiveItem(1);
+            win.hide();
+            Ext.getCmp('loggedin').update('Logged in as:' + ' &lt;b&gt;' + Ext.util.Cookies.get('username') + '&lt;/b&gt;');
+            return;
+        }
+        lay.setActiveItem(0);
+
+
+        if (values.userName == 'admin') {
+            var lay = this.getViewport().getLayout();
+            lay.setActiveItem(1);
+            win.hide();
+            Ext.util.Cookies.set('username', values.userName);
+            Ext.util.Cookies.set('token', 'some token');
+            Ext.getCmp('loggedin').update('Logged in as: ' + ' &lt;b&gt;' + values.userName + '&lt;/b&gt;');
+        }
+
+    },
+    keyenter:function (item, event) {
+        if (event.getKey() == event.ENTER) {
+            this.login();
+        }
+
+    },
+    logout:function (button) {
+        Ext.log('Logout user')
+        var lay = this.getViewport().getLayout();
+        lay.setActiveItem(0);
+        var win = Ext.getCmp('loginwindow');
+        win.show();
+
+        Ext.util.Cookies.clear('username');
+        Ext.util.Cookies.clear('token');
+    }
+});
+</pre>
+</body>
+</html>

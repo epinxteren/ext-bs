@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define('Ext.ux.app.RoutedController', {
+	extend: 'Ext.app.Controller',
+	constructor: function() {
+		this.refCache = {};
+		this.callParent(arguments);
+	},
+	render: function(layoutName, component, config) {
+		var view = this.application.render(layoutName, this, component, config);
+		this.refCache[view.itemId] = view;
+		return view;
+	},
+	
+	addLayout: function(name, layout) {
+		this.application.addLayout(name, layout);
+	},	
+	getRef: function(ref, info, config) {
+		var cache = this.refCache[ref];
+		if (cache) {
+			return cache;
+		} else if (!cache &amp;&amp; arguments.length &gt; 1) {
+			return this.callParent(arguments);
+		} else {
+			throw new Error('TransistorController#getRef could not locate view &quot;' + ref + '&quot;');
+		}
+	},
+	createView: function(viewName, config) {
+		var viewGetterFn = 'get' + this.id + viewName + 'View',
+			config	 = config || {};
+		
+		return Ext.create(this[viewGetterFn](), Ext.applyIf(config, {
+			controller: this,
+			itemId: 'view'
+		}));
+	}
+});
+</pre>
+</body>
+</html>
