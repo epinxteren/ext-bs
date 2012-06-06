@@ -32,19 +32,6 @@ Ext.define('App.model.Album', {
 
     fields:[
 
-        /*
-        {
-            name:'id',
-            type:'integer',
-            ibOptions:{
-                label:'model.album.id',
-                grid:{
-                },
-                form:{}, //Auto form,
-                filter:{}
-            }
-        },
-        */
         {
             name:'title',
             type:'string',
@@ -87,7 +74,6 @@ Ext.define('App.model.Album', {
                 form:{
                     xtype:'FieldComboBox',
 
-                    fieldLabel:'artist',
                     name:'artistId',
 
                     store:'Artists',

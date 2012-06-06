@@ -2,11 +2,11 @@
 
 
 
-Ext.define("App.store.Users", {
+Ext.define("App.store.Entities", {
     extend:'Ext.ib.Store',
-    requires: 'App.model.User',
-    model:'App.model.User',
+    requires: 'App.model.Entitie',
+    model:'App.model.Entitie',
     autoLoad:true,
-    storeId:'Users'
+    storeId:'Entities'
 });
 

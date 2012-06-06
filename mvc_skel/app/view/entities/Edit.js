@@ -1,5 +1,5 @@
-Ext.define('App.view.groups.Edit', {
-    alias:'widget.groups.Edit',
+Ext.define('App.view.entities.Edit', {
+    alias:'widget.entities.Edit',
     extend:'Ext.panel.Panel',
     flex:1,
     layout:{
@@ -7,6 +7,7 @@ Ext.define('App.view.groups.Edit', {
         align:'stretch'
     },
     initComponent:function () {
+
         var me = this;
         me.items = [
             {
@@ -14,7 +15,7 @@ Ext.define('App.view.groups.Edit', {
                 flex:1,
                 editForm:true,
                 xtype:'AutoForm',
-                store:'Groups'
+                store:'Entities'
             }
         ];
         me.callParent(arguments);

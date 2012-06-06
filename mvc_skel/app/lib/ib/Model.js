@@ -1,3 +1,7 @@
+
+
+
+
 Ext.define("Ext.ib.Model", {
     /*
      * @cfg {Object} fields will hold the fields for this model
@@ -7,15 +11,6 @@ Ext.define("Ext.ib.Model", {
 
     autoLoad:false,
 
-    initComponent : function() {
-        var me = this;
-
-
-        debugger;
-
-
-        me.callOverridden(arguments);
-    },
 
     getAssociationField:function (fieldName) {
         var me = this;
@@ -28,6 +23,8 @@ Ext.define("Ext.ib.Model", {
         return null;
     },
 
+
+
     getAssociationByField:function (field) {
         var associationName = field.belongsTo.split(".").splice(0, 1)[0];
         for (var a  in this.associations.items) {
@@ -39,7 +36,25 @@ Ext.define("Ext.ib.Model", {
         return null;
     },
 
+    /**
+     * checks if the fieldName is a field of a assosications, if so the assosication will be updated
+     * @param {String} fieldName
+     * @param {Object} newValue
+     */
     setAssociation:function (fieldName, newValue) {
+        /**
+         *Save . notation fieldNames for assosications
+         */
+        if(fieldName.indexOf(".") >= 0)
+        {
+
+
+            //return;
+        }
+
+
+
+
         var me = this;
         var field = this.getAssociationField(fieldName);
         if (field != null) {
@@ -51,7 +66,6 @@ Ext.define("Ext.ib.Model", {
                 Ext.error("association not found:"+field.belongsTo);
                 return;
             }
-
 
             if (newValue === null) {
                 //
@@ -67,13 +81,13 @@ Ext.define("Ext.ib.Model", {
                 }
                 var record  = store.getById(newValue);
 
+
+                var getterName = association.getterName ? association.getterName : "get"+association.associatedName;
+                var setterName = association.setterName ? association.setterName : "set"+association.associatedName;
+
+
                 if(record != null)
                 {
-                    var getterName = association.getterName ? association.getterName : "get"+association.associatedName;
-                    var setterName = association.setterName ? association.setterName : "set"+association.associatedName;
-
-                    //this[setterName](newValue);//This will update this record,
-
                     var currentAssociation = me[getterName]();
 
                     for(var d  in record.data)
@@ -81,14 +95,17 @@ Ext.define("Ext.ib.Model", {
                         currentAssociation.set(d,record.data[d]);
                     }
                     currentAssociation.setId(newValue);
-
-
+                }else
+                {
+                    Ext.error("Record not found:"+newValue);
                 }
             }
         }
     },
 
     set:function (fieldName, newValue) {
+
+
         var me = this;
         if (Ext.isObject(fieldName)) {
             for (var k in fieldName) {
@@ -97,8 +114,11 @@ Ext.define("Ext.ib.Model", {
         } else {
             this.setAssociation(fieldName, newValue);
         }
-        me.callOverridden(arguments);
+        return me.callOverridden(arguments);
     }
 
 
 });
+
+
+

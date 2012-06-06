@@ -1,15 +1,14 @@
 
 
-
-Ext.define('App.controller.Groups', {
+Ext.define('App.controller.Entities', {
     extend: 'Ext.ib.controller.Base',
     views: [
-        'groups.Index',
-        'groups.Create',
-        'groups.Edit'
+        'entities.Index',
+        'entities.Create',
+        'entities.Edit'
     ],
-    baseStores:["Groups"],
+    baseStores:["Entities"],
     stores:['Groups','Entities','Users','Rights'],
-    models:['Group','Entitie','Users','Right']
+    models:['Group','Entitie','User','Right']
 });
 

@@ -1,26 +1,27 @@
-Ext.define('App.view.groups.Index', {
+Ext.define('App.view.users.Index', {
     extend:'Ext.ib.component.AutoGrid',
-    alias:'widget.groups.Index',
+    alias:'widget.users.Index',
 
     hasDeleteItems:true,
     hasEditItems:true,
     hasAddItems:true,
 
-    dispatch:"groups/",
+    dispatch:"users/",
 
     titleField:'name',
-    store:'Groups',
+    store:'Users',
 
     closable:true,
 
     locales : {
-        title : 'view.groups.index.title'
+        title : 'view.users.index.title'
     },
 
     dockedItems:[
         {
+            collapsed:true,
             xtype:'AutoSearch',
-            store:'Groups'
+            store:'Users'
         }
     ]
 });

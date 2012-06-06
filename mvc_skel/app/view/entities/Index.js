@@ -1,15 +1,15 @@
-Ext.define('App.view.groups.Index', {
+Ext.define('App.view.entities.Index', {
     extend:'Ext.ib.component.AutoGrid',
-    alias:'widget.groups.Index',
+    alias:'widget.entities.Index',
 
     hasDeleteItems:true,
     hasEditItems:true,
     hasAddItems:true,
 
-    dispatch:"groups/",
+    dispatch:"entities/",
 
     titleField:'name',
-    store:'Groups',
+    store:'Entities',
 
     closable:true,
 
@@ -19,8 +19,9 @@ Ext.define('App.view.groups.Index', {
 
     dockedItems:[
         {
+            collapsed:true,
             xtype:'AutoSearch',
-            store:'Groups'
+            store:'Entities'
         }
     ]
 });

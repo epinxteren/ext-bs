@@ -7,10 +7,14 @@ Ext.define('App.view.tracks.Index', {
     hasDeleteItems:true,
     hasEditItems:true,
 
+
+
     dispatch:"tracks/",
 
     titleField:'name',
     store:'Tracks',
+
+
 
     closable:true,
 

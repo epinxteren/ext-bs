@@ -1,5 +1,5 @@
-Ext.define('App.view.groups.Edit', {
-    alias:'widget.groups.Edit',
+Ext.define('App.view.users.Edit', {
+    alias:'widget.users.Edit',
     extend:'Ext.panel.Panel',
     flex:1,
     layout:{
@@ -14,8 +14,22 @@ Ext.define('App.view.groups.Edit', {
                 flex:1,
                 editForm:true,
                 xtype:'AutoForm',
-                store:'Groups'
+                store:'Users'
+            },
+
+            {
+                closable:false,
+                xtype:'groups.Index',
+                hasEditPopupForm:true,
+
+                mainFilters:[{
+                    property:"id",
+                    value:me.itemId
+                }]
             }
+
+
+
         ];
         me.callParent(arguments);
     }

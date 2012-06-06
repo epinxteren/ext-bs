@@ -1,14 +1,160 @@
 [
     {
         "id":1,
-        "name":"view"
+        "name":"Album",
+        "rights":[
+            {
+                "id":1,
+                "type":"GET"
+            },
+            {
+                "id":2,
+                "type":"POST"
+            },
+            {
+                "id":3,
+                "type":"DELETE"
+            }
+        ],
+        "group":{
+            "id":1,
+            "name":"admin"
+
+        }
     },
     {
         "id":2,
-        "name":"add"
+        "name":"Artists",
+        "rights":[
+            {
+                "id":1,
+                "type":"GET"
+            },
+            {
+                "id":2,
+                "type":"POST"
+            },
+            {
+                "id":3,
+                "type":"DELETE"
+            }
+        ],
+        "group":{
+            "id":1,
+            "name":"admin"
+        }
     },
     {
         "id":3,
-        "name":"delete"
+        "name":"Tracks",
+        "rights":[
+            {
+                "id":1,
+                "type":"GET"
+            },
+            {
+                "id":2,
+                "type":"POST"
+            },
+            {
+                "type":"DELETE",
+                "id":3
+            }
+        ],
+        "group":{
+            "id":1,
+            "name":"admin"
+        }
+    },
+    {
+        "id":4,
+        "name":"Groups",
+        "rights":[
+            {
+                "id":1,
+                "type":"GET"
+            },
+            {
+                "id":2,
+                "type":"POST"
+            },
+            {
+                "id":3,
+                "type":"DELETE"
+            }
+        ],
+        "group":{
+            "id":1,
+            "name":"admin"
+        }
+    },
+    {
+        "id":5,
+        "name":"Users",
+        "rights":[
+            {
+                "id":1,
+                "type":"GET"
+            },
+            {
+                "id":2,
+                "type":"POST"
+            },
+            {
+                "id":3,
+                "type":"DELETE"
+            }
+        ],
+        "group":{
+            "id":1,
+            "name":"admin"
+        }
+    },
+
+
+
+
+
+    {
+        "id":6,
+        "name":"Album",
+        "rights":[
+            {
+                "id":1,
+                "type":"GET"
+            }
+        ],
+        "group":{
+            "id":2,
+            "name":"user"
+        }
+    },
+    {
+        "id":7,
+        "name":"Artists",
+        "rights":[
+            {
+                "id":1,
+                "type":"GET"
+            }
+        ],
+        "group":{
+            "id":2,
+            "name":"user"
+        }
+    },
+    {
+        "id":8,
+        "name":"Tracks",
+        "rights":[
+            {
+                "id":1,
+                "type":"GET"
+            }
+        ],
+        "group":{
+            "id":2,
+            "name":"user"
+        }
     }
 ]

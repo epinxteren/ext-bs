@@ -94,8 +94,12 @@ Ext.define('App.view.Navigation', {
                    { text:"Artists",leaf:true, action:'artists'},
                    { text:"Albums",leaf:true, action:'albums'},
                    { text:"Tracks",leaf:true, action:'tracks'}
+               ] },
+               { id:"administration", text:"Administration", expanded:false,children:[
+                   { text:"Groups",leaf:true, action:'groups'},
+                   { text:"Users",leaf:true, action:'users'},
+                   { text:"Entities",leaf:true, action:'entities'}
                ] }
-
            ]
        }
     })

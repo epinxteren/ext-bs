@@ -62,7 +62,6 @@ Ext.define('App.view.components.tracks.TrackPieChart', {
         {
             me.filters = [];
         }
-
     },
 
     initComponent:function () {

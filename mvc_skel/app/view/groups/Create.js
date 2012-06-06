@@ -1,6 +1,6 @@
-Ext.define('App.view.albums.Create', {
+Ext.define('App.view.groups.Create', {
     extend:'Ext.panel.Panel',
-    alias:'widget.albums.Create',
+    alias:'widget.groups.Create',
     flex:1,
     layout:{
         type:'hbox',
@@ -11,7 +11,7 @@ Ext.define('App.view.albums.Create', {
             flex:1,
             addForm:true,
             xtype:'AutoForm',
-            store:'Albums'
+            store:'Groups'
         }
      ]
 });

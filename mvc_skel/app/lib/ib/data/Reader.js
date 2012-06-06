@@ -17,7 +17,7 @@ Ext.define('Ext.ib.data.Reader', {
             var me = this;
 
             if (Ext.isEmpty(data[me.collectionMetaRoot]) || !Ext.isDefined(data[me.collectionMetaRoot][me.collectionTotalProperty])) {
-                me.totalProperty =  me.altTotal;
+                me.totalProperty = me.altTotal;
             } else {
                 me.totalProperty = me.collectionMetaRoot + '.' + me.collectionTotalProperty;
             }
@@ -27,7 +27,30 @@ Ext.define('Ext.ib.data.Reader', {
             } else {
                 me.root = me.collectionRoot;
             }
-            return this.callParent(arguments)
+
+            if (Ext.isDefined(data.request) && data.request.options.method === "DELETE") {
+                var record = data.request.options.records[0];
+
+                //Callback for delete
+                var callback = data.request.options.operation.callback;
+                if (Ext.isDefined(callback)) {
+                    if (data.status === 204) {
+                        if (Ext.isDefined(callback.success)) {
+                            callback.success(record, me);
+                        }
+                    } else {
+                        if (Ext.isDefined(callback.failure)) {
+                            callback.failure(record, me);
+                        }
+                    }
+                }
+
+                Ext.apply(data, record.raw);
+                return this.callParent(arguments);
+            } else {
+                return this.callParent(arguments);
+            }
+
         }
     }
 );

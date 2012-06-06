@@ -8,6 +8,9 @@ Ext.namespace('Ib').config = {
     apiUrl : 'http://localhost/',
     restUrl: 'http://localhost/zf-api-skel/public/',
 
+    dataUrl: 'http://localhost/ext-bslm/mvc_skel/app/data/',
+
+
     language   : 'nl',
     locales    : [
         { abbr : 'en', text : 'English' },

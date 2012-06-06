@@ -33,6 +33,24 @@
         }
     },
     "model":{
+
+        "groups":{
+            "name":"Name",
+            "users":"Users"
+        },
+
+        "users":{
+            "name":"Name"
+        },
+
+        "entities":{
+            "Add_entitie":"Add entitie",
+            "entitie":"entities",
+            "group":"Group",
+            "name":"Name"
+        },
+
+
         "track":{
             "name":"Name",
             "duration":"Duration",

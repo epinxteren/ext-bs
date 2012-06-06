@@ -16,7 +16,12 @@ Ext.define('Ext.ux.form.MultiSelect', {
     requires: ['Ext.panel.Panel', 'Ext.view.BoundList'],
     
     uses: ['Ext.view.DragZone', 'Ext.view.DropZone'],
-    
+
+
+
+
+    imagePath: '../images/',
+
     /**
      * @cfg {String} [dragGroup=""] The ddgroup name for the MultiSelect DragZone.
      */

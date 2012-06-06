@@ -24,9 +24,4 @@ Ext.define('App.model.Right', {
         }}
     ],
 
-
-    proxy:{
-        type:'json',
-        url:Ib.config.dataUrl + 'entities.json'
-    }
 });

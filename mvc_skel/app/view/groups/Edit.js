@@ -1,5 +1,5 @@
-Ext.define('App.view.albums.Edit', {
-    alias:'widget.albums.Edit',
+Ext.define('App.view.groups.Edit', {
+    alias:'widget.groups.Edit',
     extend:'Ext.panel.Panel',
     flex:1,
     layout:{
@@ -8,13 +8,15 @@ Ext.define('App.view.albums.Edit', {
     },
     initComponent:function () {
         var me = this;
+
+
         me.items = [
             {
                 loadItemId:me.itemId,
                 flex:1,
                 editForm:true,
                 xtype:'AutoForm',
-                store:'Albums'
+                store:'Groups'
             },
             {
                 flex:1,
@@ -25,27 +27,31 @@ Ext.define('App.view.albums.Edit', {
                 },
                 items:[
                     {
-                        mainFilters:[{
-                            property:"album",
-                            value:me.itemId
-                        }],
-
-                        onCreatePopup:function(type,popup)
-                        {
-                            var albumPicker = popup.down("FieldComboBox");
-                            if(type !== 'edit')
-                            albumPicker.select(me.itemId);
-
-                            ///albumPicker.setDisabled(true);
-                        },
-
+                        closable:false,
+                        xtype:'entities.Index',
                         hasEditPopupForm:true,
-                        xtype:'tracks.Index',
-                        flex:1
+
+                        mainFilters:[{
+                            property:"group",
+                            value:me.itemId
+                        }]
+
+                    },
+                    {
+                        closable:false,
+                        xtype:'users.Index',
+                        hasEditPopupForm:true,
+
+                        mainFilters:[{
+                            property:"group",
+                            value:me.itemId
+                        }]
+
                     }
                 ]
             }
         ];
+
         me.callParent(arguments);
     }
 });

@@ -1,7 +1,15 @@
-/**
- * Created with JetBrains PhpStorm.
- * User: epinxteren
- * Date: 4-6-12
- * Time: 11:05
- * To change this template use File | Settings | File Templates.
- */
+
+
+
+Ext.define('App.controller.Groups', {
+    extend: 'Ext.ib.controller.Base',
+    views: [
+        'groups.Index',
+        'groups.Create',
+        'groups.Edit'
+    ],
+    baseStores:["Groups"],
+    stores:['Groups','Entities','Users','Rights'],
+    models:['Group','Entitie','User','Right']
+});
+

@@ -1,0 +1,4 @@
+
+RewriteEngine On
+
+RewriteRule ^api/(.*)$ http://http://zf-api-skel.dev.ib/public/$1 [P,L]

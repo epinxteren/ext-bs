@@ -29,6 +29,16 @@ Ext.define('App.view.albums.Edit', {
                             property:"album",
                             value:me.itemId
                         }],
+
+                        onCreatePopup:function(type,popup)
+                        {
+                            var albumPicker = popup.down("FieldComboBox");
+                            if(type !== 'edit')
+                            albumPicker.select(me.itemId);
+
+                            albumPicker.setDisabled(true);
+                        },
+
                         hasEditPopupForm:true,
                         xtype:'tracks.Index',
                         flex:1

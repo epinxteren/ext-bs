@@ -1,4 +1,30 @@
 Ext.define('App.model.Artist', {
+
+    ibOptions:{
+        /**
+         * Automatic translation labels names for all type of components
+         */
+        names:{
+            /****
+             * Basic label for each component, The title for each would be:
+             * -Add    {basic}
+             * -Edit   {basic}
+             * -Detail {basic}
+             * -Grid   {basic}
+             ****/
+            basic:'model.artists.artist', //Basic label
+
+            /****
+             * You can specify a specific label to each component
+             ***/
+            addTitle:'model.artists.add'
+            //detailTitle:'',
+            //editTitle:'model.album.artistName',
+            //gridTitle:'view.albums.index.title'
+        }
+    },
+
+
     alias:'Artist',
     extend:'Ext.ib.Model',
     idProperty:'id',

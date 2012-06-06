@@ -1,12 +1,4 @@
 
-
-
-
-//Ux.locale.Overrides
-
-
-
-
 Ext.require(['Ux.locale.Overrides'],function(){
 
 Ext.require(['Ext.ib.IbReference'],function(){
@@ -20,7 +12,12 @@ Ext.require(['Ext.ib.IbReference'],function(){
                 'Dashboard',
                 'Albums',
                 'Artists',
-                'Tracks'
+                'Tracks',
+
+
+                'Groups',
+                'Users',
+                'Entities'
             ],
             requires:[
 

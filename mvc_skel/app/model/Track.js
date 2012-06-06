@@ -12,7 +12,7 @@ var bytesTemplate = new Ext.XTemplate(
 
 Ext.define('App.model.Track', {
 
-    extend:'Ext.data.Model',
+    extend:'Ext.ib.Model',
 
     idProperty:'id',
     titleField:'name',
@@ -135,10 +135,14 @@ Ext.define('App.model.Track', {
             }
         },
         {
+            type:'Object',
+            defaultValue:{id:1},
             name:'mediatype',
             fields:['id']
         },
         {
+            type:'Object',
+            defaultValue:{id:1},
             name:'genre',
             fields:['id']
         },
@@ -196,6 +200,8 @@ Ext.define('App.model.Track', {
             associationKey:'album', //The group for nested json
             primaryKey:'album.id',
             foreignKey:'id',
+
+            store:'Albums',
 
             //Options
             autoLoad:false

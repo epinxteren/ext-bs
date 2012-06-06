@@ -33,6 +33,29 @@
         }
     },
     "model":{
+
+        "groups":{
+            "group":"groep",
+            "Add_group":"Groep toevoegen",
+            "Entities":"Entiteiten",
+            "name":"Naam",
+            "users":"Gebruikers"
+        },
+
+        "users":{
+            "user":"gebruiker",
+            "Add_user":"Gebruiker toevoegen",
+            "Groups":"Groepen",
+            "name":"Naam"
+        },
+
+        "entities":{
+            "Add_entitie":"Entiteit toevoegen",
+            "entitie":"entiteit",
+            "Group":"Groep",
+            "Name":"Naam"
+        },
+
         "track":{
 
             "albumTitle":"Album titel",
